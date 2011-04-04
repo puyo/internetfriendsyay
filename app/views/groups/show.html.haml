@@ -1,0 +1,31 @@
+= div_for @group do
+  %table.schedule
+    %thead
+      %tr
+        %th
+        - Day::TIME_OFFSETS.each do |offset|
+          - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
+          %th.heading= Time.new(2000, 1, 1, hours, mins).strftime("%H%M")
+    %tbody
+      - Day::ALL.each do |day|
+        %tr
+          %th= day.name[0,2]
+          - day.offsets.each do |offset|
+            %td= @group.users_at(offset).map { |user| user.name }.join(', ')
+
+-# vertical layout
+  = div_for @group do
+    %table.schedule
+      %thead
+        %tr
+          %th
+          - Day::ALL.each do |day|
+            %th= day.name[0,2]
+
+      %tbody
+        - Day::TIME_OFFSETS.each do |offset|
+          %tr
+            - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
+            %th= Time.new(2000, 1, 1, hours, mins).strftime("%R")
+            - Day::ALL.each do |day|
+              %td= @group.users_at(offset).map { |user| user.name }.join(', ')
