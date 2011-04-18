@@ -1,0 +1,11 @@
+= form_for [@group, @schedule] do |schedule|
+  .field.name
+    = schedule.label :name
+    = schedule.text_field :name
+  .field.timezone
+    = schedule.label :timezone
+    = schedule.text_field :timezone
+  .field.data
+    = schedule.label :data
+    = schedule.text_field :data
+  = schedule.submit

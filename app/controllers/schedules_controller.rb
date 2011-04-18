@@ -1,8 +1,19 @@
 class SchedulesController < ApplicationController
+  before_filter :load_group
+
   def new
+    @schedule = @group.schedules.build
   end
 
   def create
+    @schedule = @group.schedules.new(params[:schedule])
+    if @schedule.save
+      flash.notice = "Schedule added"
+      redirect_to group_url(@group)
+    else
+      flash.alert = ["Schedule not created", @schedule.errors.full_messages].join(': ')
+      render :new
+    end
   end
 
   def edit
@@ -14,6 +25,13 @@ class SchedulesController < ApplicationController
   private
 
   def load_group
-    @group = Group.find_by_uuid(params[:group_id])
+    @group = Group.find(params[:group_id])
+  end
+
+  def check_signed_in
+    if not signed_in?
+      flash.alert = 'You must be signed on to manage schedules'
+      redirect_to group_url(@group)
+    end
   end
 end

@@ -14,10 +14,10 @@ class GroupsController < ApplicationController
     @group = Group.new(params[:group])
     @schedule = @group.schedules.build(sched)
     if @group.save
-      flash[:success] = "Group created"
+      flash.notice = "Group created"
       redirect_to group_url(@group)
     else
-      flash[:error] = "Group not created"
+      flash.alert = ["Group not created", @group.errors.full_messages + @schedule.errors.full_messages].join(', ')
       render :new
     end
   end
