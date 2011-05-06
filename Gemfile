@@ -10,7 +10,8 @@ gem 'jammit', '0.5.3'      # asset packaging
 gem 'compass', '0.10.6'    # sass mixins and generators
 gem 'chunky_png', '0.11.0' # encode PNG images
 
-#gem 'ruby-debug', :group => [:development, :test]
-gem 'rspec-rails', '>= 2.0', :group => [:development, :test]
+gem 'thin', :group => [:development]
+gem 'ruby-debug19', :group => [:development, :test]
+gem 'rspec-rails', :group => [:development, :test]
 gem 'cucumber-rails', :group => :test
 gem 'capybara', :group => :test
