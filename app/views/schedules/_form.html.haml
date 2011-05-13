@@ -1,0 +1,44 @@
+.field.name
+  = form.label :name, 'Your name'
+  = form.text_field :name
+.field.timezone
+  = form.label :timezone, 'Your timezone'
+  = form.time_zone_select :timezone, /Australia/
+
+%table.schedule
+  %thead
+    %tr
+      %th
+      - Day::TIME_OFFSETS.each do |offset|
+        - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
+        %th.heading= Time.new(2000, 1, 1, hours, mins).strftime("%H%M")
+  %tbody
+    - Day::ALL.each do |day|
+      %tr
+        %th= day.name[0,2]
+        - day.offsets.each do |offset|
+          %td= check_box_tag format(available_at_field, offset), {}, schedule.available_at?(offset)
+
+:javascript
+  var down = false;
+  var value = false;
+  $('input[type=checkbox]').mousedown(function(event){
+    //console.log('down');
+    down = true;
+    value = !$(this).attr('checked');
+    $(this).attr('checked', value);
+    return false;
+  }).mouseover(function(event){
+    //console.log('over');
+    if (down) { $(this).attr('checked', value); }
+    return false;
+  }).change(function(){
+    return false;
+  }).click(function(){
+    return false;
+  });
+
+  $(document).mouseup(function(){
+    //console.log('up');
+    down = false;
+  });

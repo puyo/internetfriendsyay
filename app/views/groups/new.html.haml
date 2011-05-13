@@ -1,12 +1,5 @@
 = form_for @group do |group|
-  = group.fields_for @schedule do |schedule|
-    .field.name
-      = schedule.label :name
-      = schedule.text_field :name
-    .field.timezone
-      = schedule.label :timezone
-      = schedule.text_field :timezone
-    .field.data
-      = schedule.label :data
-      = schedule.text_field :data
-  = group.submit
+  = group.fields_for :schedules do |f|
+    = render partial: 'schedules/form', locals: { schedule: @schedule, form: f, available_at_field: 'group[schedules_attributes[0][available_at[%d]]]' }
+  .buttons
+    = group.submit

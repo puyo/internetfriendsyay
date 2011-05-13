@@ -1,10 +1,8 @@
 class Schedule < ActiveRecord::Base
   belongs_to :group
-  validates_presence_of :name
   validates_length_of :name, :minimum => 1
   validates_uniqueness_of :name, :scope => :group_id
-  validates_inclusion_of :timezone, TZInfo::Timezone.all.map(&:name)
-
+  validates_inclusion_of :timezone, :in => ActiveSupport::TimeZone.zones_map.keys #TZInfo::Timezone.all.map(&:name)
 
   def user_at(offset)
     if available_at?(offset)
@@ -42,6 +40,11 @@ class Schedule < ActiveRecord::Base
     times.map{|time| (time.to_i - target_mon.to_i)/60 % (Day::OFFSETS_PER_WEEK*Day::TIME_INTERVAL) }
   end
 
+  def available_at?(offset)
+    byte, shift = offset.to_i.divmod(8)
+    (data.to_s.bytes.to_a[byte].to_i & (1 << shift)) != 0
+  end
+
   private
 
   def relative_offsets
@@ -55,10 +58,5 @@ class Schedule < ActiveRecord::Base
     end
     result = Time.utc(result.year, result.month, result.day) # round off minutes and seconds
     tz.local_to_utc(result)
-  end
-
-  def available_at?(offset)
-    byte, shift = offset.to_i.divmod(8)
-    (data.to_s.bytes.to_a[byte].to_i & (1 << shift)) != 0
   end
 end

@@ -8,10 +8,9 @@ class SchedulesController < ApplicationController
   def create
     @schedule = @group.schedules.new(params[:schedule])
     if @schedule.save
-      flash.notice = "Schedule added"
-      redirect_to group_url(@group)
+      redirect_to group_url(@group), :notice => 'Schedule created'
     else
-      flash.alert = ["Schedule not created", @schedule.errors.full_messages].join(': ')
+      flash.now.alert = @schedule.errors.full_messages.join(', ')
       render :new
     end
   end
