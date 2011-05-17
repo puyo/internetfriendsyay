@@ -29,17 +29,6 @@ class Person < ActiveRecord::Base
     result
   end
 
-  def minute_offsets(target_timezone)
-    if target_timezone.is_a?(String)
-      target_timezone = TZInfo::Timezone.get(target_timezone)
-    end
-    target_mon = Day.next_monday(target_timezone)
-    source_tz = TZInfo::Timezone.get(timezone)
-    source_mon = Day.next_monday(source_tz)
-    times = relative_offsets.map{|offset| source_mon + offset*60*Day::TIME_INTERVAL }
-    times.map{|time| (time.to_i - target_mon.to_i)/60 % (Day::OFFSETS_PER_WEEK*Day::TIME_INTERVAL) }
-  end
-
   def available_at?(offset)
     byte, shift = offset.to_i.divmod(8)
     (data.to_s.bytes.to_a[byte].to_i & (1 << shift)) != 0
