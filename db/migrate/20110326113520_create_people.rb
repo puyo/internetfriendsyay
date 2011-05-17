@@ -1,6 +1,6 @@
-class CreateSchedules < ActiveRecord::Migration
+class CreatePeople < ActiveRecord::Migration
   def self.up
-    create_table :schedules do |t|
+    create_table :people do |t|
       t.references :group
       t.string :name, :null => false
       t.string :timezone, :null => false
@@ -10,6 +10,6 @@ class CreateSchedules < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :schedules
+    drop_table :people
   end
 end

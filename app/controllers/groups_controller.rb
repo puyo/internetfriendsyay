@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    @schedule = @group.schedules.build
+    @person = @group.people.build
   end
 
   def create

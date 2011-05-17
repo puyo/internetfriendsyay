@@ -5,7 +5,7 @@
   = form.label :timezone, 'Your timezone'
   = form.time_zone_select :timezone, /Australia/
 
-%table.schedule
+%table.person
   %thead
     %tr
       %th
@@ -17,7 +17,7 @@
         %th= time.strftime("%H%M")
         - @group.each_day do |day|
           - offset = day.offset(relative_offset)
-          %td.check_box= check_box_tag format(available_at_field, offset), {}, schedule.available_at?(offset)
+          %td.check_box= check_box_tag format(available_at_field, offset), {}, person.available_at?(offset)
 
 :javascript
   var down = false;

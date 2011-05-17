@@ -1,4 +1,0 @@
-= form_for [@group, @schedule] do |f|
-  = render partial: 'schedules/form', locals: { schedule: @schedule, form: f, available_at_field: 'schedule[available_at[%d]]' }
-  .buttons
-    = f.submit

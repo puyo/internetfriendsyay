@@ -1,4 +1,4 @@
-class Schedule < ActiveRecord::Base
+class Person < ActiveRecord::Base
   belongs_to :group
   validates_length_of :name, :minimum => 1
   validates_uniqueness_of :name, :scope => :group_id

@@ -18,10 +18,10 @@
           - @group.each_day do |day|
             %td.users= @group.users_at(day.offset(relative_offset)).join(', ')
 
-  .schedule_list
+  .person_list
     %h3 People
     %ul
-      - @group.schedules.each do |schedule|
-        %li= schedule.name
+      - @group.people.each do |person|
+        %li= person.name
 
-    = link_to 'New', new_group_schedule_path(@group)
+    = link_to 'New', new_group_person_path(@group)

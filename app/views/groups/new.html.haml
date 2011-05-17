@@ -1,5 +1,5 @@
 = form_for @group do |group|
-  = group.fields_for :schedules do |f|
-    = render partial: 'schedules/form', locals: { schedule: @schedule, form: f, available_at_field: 'group[schedules_attributes[0][available_at[%d]]]' }
+  = group.fields_for :people do |f|
+    = render partial: 'people/form', locals: { person: @person, form: f, available_at_field: 'group[people_attributes[0][available_at[%d]]]' }
   .buttons
     = group.submit
