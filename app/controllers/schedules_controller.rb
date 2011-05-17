@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   before_filter :load_group
 
   def new
-    @schedule = @group.schedules.build
+    @schedule = @group.schedules.build(:timezone => @user.timezone)
   end
 
   def create

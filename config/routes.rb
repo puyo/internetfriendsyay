@@ -2,6 +2,7 @@ InternetFriendsYay::Application.routes.draw do
   resources :groups do
     resources :schedules
   end
+  match 'user/update' => 'user#update', :as => :update_user
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

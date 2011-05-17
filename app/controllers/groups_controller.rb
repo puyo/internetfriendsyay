@@ -23,5 +23,6 @@ class GroupsController < ApplicationController
 
   def load_group
     @group = Group.find(params[:id])
+    @group.user = @user
   end
 end

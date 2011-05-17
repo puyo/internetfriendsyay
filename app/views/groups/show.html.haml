@@ -1,33 +1,27 @@
 = div_for @group do
-  %table.schedule
+  = form_for :user, @user, :url => update_user_path do |f|
+    = hidden_field_tag :return_to, group_url(@group)
+    = f.label :timezone, 'Your timezone'
+    = f.time_zone_select :timezone, /Australia/
+    = f.submit 'Update'
+
+  %table.time_table
     %thead
       %tr
         %th
-        - Day::TIME_OFFSETS.each do |offset|
-          - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
-          %th.heading= Time.new(2000, 1, 1, hours, mins).strftime("%H%M")
+        - @group.each_day do |day|
+          %th.heading= day.name[0,2]
     %tbody
-      - Day::ALL.each do |day|
-        %tr
-          %th= day.name[0,2]
-          - day.offsets.each do |offset|
-            %td= @group.users_at(offset).join(', ')
+      - @group.each_time_of_day do |relative_offset, time|
+        %tr{:class => cycle('odd', 'even')}
+          %th= time.strftime("%H%M")
+          - @group.each_day do |day|
+            %td.users= @group.users_at(day.offset(relative_offset)).join(', ')
 
-  =link_to 'Add Your Schedule', new_group_schedule_path(@group)
+  .schedule_list
+    %h3 People
+    %ul
+      - @group.schedules.each do |schedule|
+        %li= schedule.name
 
--# vertical layout
-  = div_for @group do
-    %table.schedule
-      %thead
-        %tr
-          %th
-          - Day::ALL.each do |day|
-            %th= day.name[0,2]
-
-      %tbody
-        - Day::TIME_OFFSETS.each do |offset|
-          %tr
-            - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
-            %th= Time.new(2000, 1, 1, hours, mins).strftime("%R")
-            - Day::ALL.each do |day|
-              %td= @group.users_at(offset).join(', ')
+    = link_to 'New', new_group_schedule_path(@group)

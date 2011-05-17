@@ -33,9 +33,9 @@ class Schedule < ActiveRecord::Base
     if target_timezone.is_a?(String)
       target_timezone = TZInfo::Timezone.get(target_timezone)
     end
-    target_mon = next_monday(target_timezone)
+    target_mon = Day.next_monday(target_timezone)
     source_tz = TZInfo::Timezone.get(timezone)
-    source_mon = next_monday(source_tz)
+    source_mon = Day.next_monday(source_tz)
     times = relative_offsets.map{|offset| source_mon + offset*60*Day::TIME_INTERVAL }
     times.map{|time| (time.to_i - target_mon.to_i)/60 % (Day::OFFSETS_PER_WEEK*Day::TIME_INTERVAL) }
   end
@@ -45,18 +45,7 @@ class Schedule < ActiveRecord::Base
     (data.to_s.bytes.to_a[byte].to_i & (1 << shift)) != 0
   end
 
-  private
-
   def relative_offsets
     available_at.keys
-  end
-
-  def next_monday(tz)
-    result = tz.now
-    while not result.monday?
-      result += 60*60*24 # one day
-    end
-    result = Time.utc(result.year, result.month, result.day) # round off minutes and seconds
-    tz.local_to_utc(result)
   end
 end

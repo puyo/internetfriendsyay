@@ -4,6 +4,7 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
 @import compass/reset
+@import compass/utilities/general/clearfix
 @import text
 @import compass/css3
 
@@ -14,19 +15,41 @@ body
   width: 960px
 
 .schedule
-  padding: 20px 0
+  padding-top: 20px
   font-size: 12px
-  td
-    //border: 1px solid #999
-    //margin: 2px
   .heading
-    //-webkit-transform: rotate(-90deg)
-    //-moz-transform: rotate(-90deg)
     +apply-transform(rotate(-50deg))
     max-width: 10px
     position: relative
-    left: -5px
+    bottom: 5px
+  .check_box
+    padding: 0
+    margin: 0
+    input
+      padding: 0
+      margin: 0
 
+.group
+  +pie-clearfix
+
+  form
+    padding: 0 0 20px
+
+  .time_table
+    float: left
+    font-size: 12px
+    td
+      border: 1px solid white
+    .users
+      min-width: 20px
+    .odd
+      background-color: #eee
+    .even
+      background-color: #ddd
+
+  .schedule_list
+    float: left
+    margin-left: 20px
 
 h1
   font-family: "Aenigma Scrawl", serif

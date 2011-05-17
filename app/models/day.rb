@@ -15,7 +15,11 @@ class Day
   end
 
   def offsets
-    TIME_OFFSETS.map{|time_offset| @opts[:day_offset]*OFFSETS_PER_DAY  + time_offset }
+    TIME_OFFSETS.map{|relative_offset| offset(relative_offset) }
+  end
+
+  def offset(relative_offset)
+    @opts[:day_offset]*OFFSETS_PER_DAY + relative_offset
   end
 
   ALL = [
@@ -27,4 +31,13 @@ class Day
     Day.new(:name => 'Saturday', :day_offset => 5),
     Day.new(:name => 'Sunday', :day_offset => 6),
   ]
+
+  def self.next_monday(tz)
+    result = tz.tzinfo.now
+    while not result.monday?
+      result += 60*60*24 # one day
+    end
+    result = Time.utc(result.year, result.month, result.day) # round off minutes and seconds
+    tz.tzinfo.local_to_utc(result)
+  end
 end

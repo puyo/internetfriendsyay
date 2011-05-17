@@ -9,15 +9,15 @@
   %thead
     %tr
       %th
-      - Day::TIME_OFFSETS.each do |offset|
-        - hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
-        %th.heading= Time.new(2000, 1, 1, hours, mins).strftime("%H%M")
+      - @group.each_day do |day|
+        %th.heading= day.name[0,2]
   %tbody
-    - Day::ALL.each do |day|
-      %tr
-        %th= day.name[0,2]
-        - day.offsets.each do |offset|
-          %td= check_box_tag format(available_at_field, offset), {}, schedule.available_at?(offset)
+    - @group.each_time_of_day do |relative_offset, time|
+      %tr{:class => cycle('odd', 'even')}
+        %th= time.strftime("%H%M")
+        - @group.each_day do |day|
+          - offset = day.offset(relative_offset)
+          %td.check_box= check_box_tag format(available_at_field, offset), {}, schedule.available_at?(offset)
 
 :javascript
   var down = false;
