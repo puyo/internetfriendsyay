@@ -5,10 +5,14 @@
 
 @import compass/reset
 @import compass/utilities/general/clearfix
-@import text
 @import compass/css3
 
 +font-face("Aenigma Scrawl", font-files("/fonts/aescrawl.ttf", truetype))
+
+ul
+  margin: 0.5em 0
+  padding: 0 0 0 40px
+  list-style-type: disc
 
 body
   margin: 20px auto
@@ -51,8 +55,10 @@ body
     float: left
     margin-left: 20px
 
-h1
+h1, h2, h3, h4
   font-family: "Aenigma Scrawl", serif
+  color: blue
+h1
   font-size: 300%
 
 p
