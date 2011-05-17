@@ -4,7 +4,7 @@ class CreateSchedules < ActiveRecord::Migration
       t.references :group
       t.string :name, :null => false
       t.string :timezone, :null => false
-      t.binary :data, :limit => 84
+      t.binary :data
       t.timestamps
     end
   end
