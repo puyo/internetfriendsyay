@@ -15,3 +15,4 @@ gem 'ruby-debug19', :group => [:development, :test]
 gem 'rspec-rails', :group => [:development, :test]
 gem 'cucumber-rails', :group => :test
 gem 'capybara', :group => :test
+gem 'heroku', :require => nil
