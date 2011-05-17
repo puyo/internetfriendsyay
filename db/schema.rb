@@ -12,17 +12,17 @@
 
 ActiveRecord::Schema.define(:version => 20110326113520) do
 
-  create_table "groups", :force => true do |t|
-    t.string   "uuid",       :null => false
+  create_table "people", :force => true do |t|
+    t.integer  "schedule_id"
+    t.string   "name",        :null => false
+    t.string   "timezone",    :null => false
+    t.binary   "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "people", :force => true do |t|
-    t.integer  "group_id"
-    t.string   "name",       :null => false
-    t.string   "timezone",   :null => false
-    t.binary   "data"
+  create_table "schedules", :force => true do |t|
+    t.string   "uuid",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

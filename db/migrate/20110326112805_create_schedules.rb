@@ -1,12 +1,12 @@
-class CreateGroups < ActiveRecord::Migration
+class CreateSchedules < ActiveRecord::Migration
   def self.up
-    create_table :groups do |t|
+    create_table :schedules do |t|
       t.string :uuid, :null => false
       t.timestamps
     end
   end
 
   def self.down
-    drop_table :groups
+    drop_table :schedules
   end
 end

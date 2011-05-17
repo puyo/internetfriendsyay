@@ -9,13 +9,13 @@
   %thead
     %tr
       %th
-      - @group.each_day do |day|
+      - @schedule.each_day do |day|
         %th.heading= day.name[0,2]
   %tbody
-    - @group.each_time_of_day do |relative_offset, time|
+    - @schedule.each_time_of_day do |relative_offset, time|
       %tr{:class => cycle('odd', 'even')}
         %th= time.strftime("%H%M")
-        - @group.each_day do |day|
+        - @schedule.each_day do |day|
           - offset = day.offset(relative_offset)
           %td.check_box= check_box_tag format(available_at_field, offset), {}, person.available_at?(offset)
 

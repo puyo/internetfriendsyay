@@ -1,4 +1,4 @@
-class Group < ActiveRecord::Base
+class Schedule < ActiveRecord::Base
   has_many :people, :dependent => :destroy
   before_create :set_uuid
   accepts_nested_attributes_for :people

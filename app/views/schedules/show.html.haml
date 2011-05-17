@@ -1,6 +1,6 @@
-= div_for @group do
+= div_for @schedule do
   = form_for :user, @user, :url => update_user_path do |f|
-    = hidden_field_tag :return_to, group_url(@group)
+    = hidden_field_tag :return_to, schedule_url(@schedule)
     = f.label :timezone, 'Your timezone'
     = f.time_zone_select :timezone, /Australia/
     = f.submit 'Update'
@@ -9,19 +9,19 @@
     %thead
       %tr
         %th
-        - @group.each_day do |day|
+        - @schedule.each_day do |day|
           %th.heading= day.name[0,2]
     %tbody
-      - @group.each_time_of_day do |relative_offset, time|
+      - @schedule.each_time_of_day do |relative_offset, time|
         %tr{:class => cycle('odd', 'even')}
           %th= time.strftime("%H%M")
-          - @group.each_day do |day|
-            %td.users= @group.users_at(day.offset(relative_offset)).join(', ')
+          - @schedule.each_day do |day|
+            %td.users= @schedule.users_at(day.offset(relative_offset)).join(', ')
 
   .person_list
     %h3 People
     %ul
-      - @group.people.each do |person|
+      - @schedule.people.each do |person|
         %li= person.name
 
-    = link_to 'New', new_group_person_path(@group)
+    = link_to 'New', new_schedule_person_path(@schedule)

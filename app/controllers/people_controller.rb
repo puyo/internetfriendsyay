@@ -1,14 +1,14 @@
 class PeopleController < ApplicationController
-  before_filter :load_group
+  before_filter :load_schedule
 
   def new
-    @person = @group.people.build(:timezone => @user.timezone)
+    @person = @schedule.people.build(:timezone => @user.timezone)
   end
 
   def create
-    @person = @group.people.new(params[:person])
+    @person = @schedule.people.new(params[:person])
     if @person.save
-      redirect_to group_url(@group), :notice => 'Person added'
+      redirect_to schedule_url(@schedule), :notice => 'Person added'
     else
       flash.now.alert = @person.errors.full_messages.join(', ')
       render :new
@@ -23,14 +23,14 @@ class PeopleController < ApplicationController
 
   private
 
-  def load_group
-    @group = Group.find(params[:group_id])
+  def load_schedule
+    @schedule = Schedule.find(params[:schedule_id])
   end
 
   def check_signed_in
     if not signed_in?
       flash.alert = 'You must be signed on to manage people'
-      redirect_to group_url(@group)
+      redirect_to schedule_url(@schedule)
     end
   end
 end

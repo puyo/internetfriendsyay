@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
-  belongs_to :group
+  belongs_to :schedule
   validates_length_of :name, :minimum => 1
-  validates_uniqueness_of :name, :scope => :group_id
+  validates_uniqueness_of :name, :scope => :schedule_id
   validates_inclusion_of :timezone, :in => ActiveSupport::TimeZone.zones_map.keys #TZInfo::Timezone.all.map(&:name)
 
   def user_at(offset)

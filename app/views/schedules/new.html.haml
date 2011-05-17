@@ -1,0 +1,5 @@
+= form_for @schedule do |schedule|
+  = schedule.fields_for :people do |f|
+    = render partial: 'people/form', locals: { person: @person, form: f, available_at_field: 'schedule[people_attributes[0][available_at[%d]]]' }
+  .buttons
+    = schedule.submit

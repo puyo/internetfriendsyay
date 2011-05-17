@@ -1,5 +1,5 @@
 InternetFriendsYay::Application.routes.draw do
-  resources :groups do
+  resources :schedules do
     resources :people
   end
   match 'user/update' => 'user#update', :as => :update_user
