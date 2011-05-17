@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   private
 
   def load_user
-    @user = session[:user]
+    @user = session[:user] || User.new
   end
 end

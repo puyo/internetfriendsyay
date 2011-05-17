@@ -4,7 +4,7 @@ class User
   end
 
   def timezone
-    opts[:timezone] || ''
+    opts[:timezone] || 'Sydney'
   end
 
   def persisted?

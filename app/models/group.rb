@@ -6,8 +6,7 @@ class Group < ActiveRecord::Base
   attr_reader :schedule_offsets
 
   def user=(user)
-    @user = user
-    target = ActiveSupport::TimeZone.new(@user.timezone)
+    target = ActiveSupport::TimeZone.new(user.timezone)
     target_mon = Day.next_monday(target)
     @users_at_offset = Hash.new{|h,k| h[k] = [] }
     schedules.each do |schedule|
@@ -19,7 +18,6 @@ class Group < ActiveRecord::Base
         @users_at_offset[offset].push(schedule.name)
       end
     end
-    pp @users_at_offset
   end
 
   def users_at(offset)
