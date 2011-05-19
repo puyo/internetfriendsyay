@@ -6,7 +6,11 @@
     = include_javascripts :screen
     = csrf_meta_tag
   %body
-    %h1 Internet Friends Yay
+    .title
+      %h1 Internet Friends Yay
+      .biline
+        An application for herding virtual cats.
+    
     .flash
       - if flash.notice
         .notice
