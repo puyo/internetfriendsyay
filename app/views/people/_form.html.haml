@@ -1,8 +1,8 @@
 .field.name
-  = form.label :name, 'Your name'
+  = form.label :name
   = form.text_field :name
 .field.timezone
-  = form.label :timezone, 'Your timezone'
+  = form.label :timezone
   = form.time_zone_select :timezone, /Australia/
 
 %table.person
@@ -14,22 +14,22 @@
   %tbody
     - @schedule.each_time_of_day do |relative_offset, time|
       %tr{:class => cycle('odd', 'even')}
-        %th= time.strftime("%H%M")
+        %th= time.strftime('%I:%M %p')
         - @schedule.each_day do |day|
           - offset = day.offset(relative_offset)
           %td.check_box= check_box_tag format(available_at_field, offset), {}, person.available_at?(offset)
 
 :javascript
+  // check box drawing
+
   var down = false;
   var value = false;
   $('input[type=checkbox]').mousedown(function(event){
-    //console.log('down');
     down = true;
     value = !$(this).attr('checked');
     $(this).attr('checked', value);
     return false;
   }).mouseover(function(event){
-    //console.log('over');
     if (down) { $(this).attr('checked', value); }
     return false;
   }).change(function(){
@@ -39,6 +39,5 @@
   });
 
   $(document).mouseup(function(){
-    //console.log('up');
     down = false;
   });

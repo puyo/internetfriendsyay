@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
   def create
     @person = @schedule.people.new(params[:person])
     if @person.save
-      redirect_to schedule_url(@schedule), notice: 'Person added'
+      redirect_to schedule_url(@schedule), notice: "#{@person.name} added"
     else
       flash.now.alert = @person.errors.full_messages.join(', ')
       render :new
@@ -28,9 +28,8 @@ class PeopleController < ApplicationController
   end
 
   def destroy
-    flash.notice = "#{@person.name} removed"
     @person.destroy
-    redirect_to @schedule
+    redirect_to @schedule, notice: "#{@person.name} removed"
   end
 
   private
@@ -41,12 +40,5 @@ class PeopleController < ApplicationController
 
   def load_schedule
     @schedule = Schedule.find(params[:schedule_id])
-  end
-
-  def check_signed_in
-    if not signed_in?
-      flash.alert = 'You must be signed on to manage people'
-      redirect_to schedule_url(@schedule)
-    end
   end
 end

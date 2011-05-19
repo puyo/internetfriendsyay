@@ -34,6 +34,6 @@
             %td.timezone= person.timezone
             %td.options
               = link_to 'Edit', edit_schedule_person_path(@schedule, person)
-              = link_to 'Remove', [@schedule, person], confirm: 'Are you sure?', method: 'delete'
+              = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
     .new
       = link_to 'Add', new_schedule_person_path(@schedule)

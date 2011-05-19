@@ -63,10 +63,22 @@ body
   tr.even
     background-color: #ddd
 
-.notice
-  background-color: #eae
-  padding: 1em
+.flash
+  height: 20px
   margin: 10px 0
+
+  .notice, .alert
+    font-size: 12px
+    padding: 4px 1em
+
+  .notice
+    background-color: #eae
+
+  .alert
+    background-color: #eaa
+
+.field_with_errors
+  color: #a44
 
 h1, h2, h3, h4
   font-family: "Aenigma Scrawl", serif
@@ -110,5 +122,3 @@ button:active span
   border: 1px solid rgba(255, 255, 255, 0.2)
   border-top: 1px solid rgba(255, 255, 255, 0.4)
 
-.alert, .field_with_errors
-  color: red

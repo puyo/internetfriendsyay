@@ -7,11 +7,12 @@
     = csrf_meta_tag
   %body
     %h1 Internet Friends Yay
-    - if flash.notice
-      .notice
-        %p= notice
-    - if flash.alert
-      .alert
-        %p= alert
+    .flash
+      - if flash.notice
+        .notice
+          %p= notice
+      - if flash.alert
+        .alert
+          %p= alert
 
     = yield
