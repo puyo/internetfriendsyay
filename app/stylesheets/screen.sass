@@ -39,21 +39,34 @@ body
   form
     padding: 0 0 20px
 
-  .time_table
+  .timetable
     float: left
-    font-size: 12px
-    td
-      border: 1px solid white
     .users
       min-width: 20px
-    .odd
-      background-color: #eee
-    .even
-      background-color: #ddd
 
-  .person_list
+  .people
     float: left
     margin-left: 20px
+
+  table
+    font-size: 12px
+  th, td
+    padding: 2px 0.5em
+    border: 1px solid white
+  th
+    color: white
+    background-color: #444
+  tr
+    background-color: #ddd
+  tr.odd
+    background-color: #eee
+  tr.even
+    background-color: #ddd
+
+.notice
+  background-color: #eae
+  padding: 1em
+  margin: 10px 0
 
 h1, h2, h3, h4
   font-family: "Aenigma Scrawl", serif

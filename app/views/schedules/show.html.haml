@@ -5,23 +5,35 @@
     = f.time_zone_select :timezone, /Australia/
     = f.submit 'Update'
 
-  %table.time_table
-    %thead
-      %tr
-        %th
-        - @schedule.each_day do |day|
-          %th.heading= day.name[0,2]
-    %tbody
-      - @schedule.each_time_of_day do |relative_offset, time|
-        %tr{:class => cycle('odd', 'even')}
-          %th= time.strftime("%H%M")
+  .timetable
+    %h3 Schedule
+    %table
+      %thead
+        %tr
+          %th
           - @schedule.each_day do |day|
-            %td.users= @schedule.users_at(day.offset(relative_offset)).join(', ')
+            %th.heading= day.name
+      %tbody
+        - @schedule.each_time_of_day do |relative_offset, time|
+          %tr{class: cycle('odd', 'even')}
+            %th= time.strftime("%I:%M %p")
+            - @schedule.each_day do |day|
+              %td.users= @schedule.users_at(day.offset(relative_offset)).join(', ')
 
-  .person_list
+  .people
     %h3 People
-    %ul
-      - @schedule.people.each do |person|
-        %li= person.name
-
-    = link_to 'New', new_schedule_person_path(@schedule)
+    %table
+      %thead
+        %th Name
+        %th Timezone
+        %th Options
+      %tbody
+        - @schedule.people.each do |person|
+          %tr{class: cycle('odd', 'even')}
+            %td.name= person.name
+            %td.timezone= person.timezone
+            %td.options
+              = link_to 'Edit', edit_schedule_person_path(@schedule, person)
+              = link_to 'Remove', [@schedule, person], confirm: 'Are you sure?', method: 'delete'
+    .new
+      = link_to 'Add', new_schedule_person_path(@schedule)
