@@ -18,7 +18,10 @@
           %tr{class: cycle('odd', 'even')}
             %th= time.strftime("%I:%M %p")
             - @schedule.each_day do |day|
-              %td.users= @schedule.users_at(day.offset(relative_offset)).join(', ')
+              %td.users
+                - @schedule.users_at(day.offset(relative_offset)).each do |name|
+                  = name
+                  %br
 
   .people
     %h3 People
