@@ -7,19 +7,66 @@
 @import compass/utilities/general/clearfix
 @import compass/css3
 
-+font-face("Aenigma Scrawl", font-files("/fonts/aescrawl.ttf", truetype))
+// ------------------------------------------------------------
+// layout
+
+body
+  margin: 20px auto
+  width: 960px
 
 ul
   margin: 0.5em 0
   padding: 0 0 0 40px
   list-style-type: disc
 
-body
-  margin: 20px auto
-  width: 960px
+// ------------------------------------------------------------
+// text
 
-.person
-  padding-top: 20px
++font-face("Aenigma Scrawl", font-files("/fonts/aescrawl.ttf", truetype))
+
+=webfont
+  font-family: "Aenigma Scrawl", serif
+
+=heading
+  +webfont
+  color: blue
+  a
+    text-decoration: none
+    color: blue
+
+h1, h2, h3, h4
+  +heading
+
+.byline
+  +webfont
+
+a
+  color: #605555
+
+a:hover
+  color: blue
+
+h1
+  font-size: 300%
+
+h3
+  font-size: 180%
+
+p
+  margin-bottom: 0.5em
+
+// ------------------------------------------------------------
+// forms
+
+.field
+  margin: 10px 0
+
+.field_with_errors
+  display: inline
+  color: #a44
+
+.field.available_at
+  padding-top: 10px
   font-size: 12px
   .heading
     +apply-transform(rotate(-50deg))
@@ -33,24 +80,34 @@ body
       padding: 0
       margin: 0
 
+.buttons
+  margin: 10px 0
+
+// ------------------------------------------------------------
+// rendering a schedule
+
 .schedule
   +pie-clearfix
 
-  form
-    padding: 0 0 10px
-
   .timetable
     float: left
+    h3
+      float: left
+    form
+      float: right
     .users
       min-width: 20px
 
   .people
     float: left
     margin-left: 20px
-    .new
-      margin: 10px 0
+    h3
+      float: left
+    .add
+      float: right
 
   table
+    clear: both
     font-size: 11px
     color: #444
     font-family: sans-serif
@@ -66,6 +123,17 @@ body
   tr.even
     background-color: #e4dddd
 
+// ------------------------------------------------------------
+.breadcrumb
+  padding: 0
+  li
+    display: inline
+  li:before
+    content: ' > '
+  a
+    
+
+// ------------------------------------------------------------
 .flash
   height: 20px
   margin: 10px 0
@@ -79,54 +147,3 @@ body
 
   .alert
     background-color: #eaa
-
-.field_with_errors
-  color: #a44
-
-h1, h2, h3, h4, .byline
-  font-family: "Aenigma Scrawl", serif
-
-h1, h2, h3, h4
-  color: blue
-h1
-  font-size: 300%
-
-h3
-  font-size: 125%
-
-p
-  margin-bottom: 0.5em
-
-#drawing, #drawarea
-  border: 4px solid #ccc
-  float: left
-
-button
-  float: left
-  cursor: pointer
-  -webkit-user-select: none
-  -moz-user-select: none
-  -webkit-border-radius: 5px
-  -moz-border-radius: 5px
-  border-radius: 5px
-  border: 1px solid rgba(0, 0, 0, 0.5)
-
-button
-  background-color: #d93ff0 !important
-  /* Change the colour of the button here
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.4)))
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.4))
-
-button:hover
-  /* BUG! - must inlude "a" before class name for gradient to work in FF
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.4)), to(rgba(0, 0, 0, 0.3)))
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.3))
-
-button:active
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0.2)))
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2))
-
-button:active span
-  border: 1px solid rgba(255, 255, 255, 0.2)
-  border-top: 1px solid rgba(255, 255, 255, 0.4)
-

@@ -1,12 +1,12 @@
 = div_for @schedule do
-  = form_for :user, @user, :url => update_user_path do |f|
-    = hidden_field_tag :return_to, schedule_url(@schedule)
-    = f.label :timezone, 'Your timezone'
-    = f.time_zone_select :timezone, /Australia/
-    = f.submit 'Update'
 
   .timetable
     %h3 Schedule
+    = form_for :user, @user, :url => update_user_path do |f|
+      = hidden_field_tag :return_to, schedule_url(@schedule)
+      = f.label :timezone, 'Time Zone:'
+      = f.time_zone_select :timezone, /Australia/
+      = f.submit 'Update'
     %table
       %thead
         %tr
@@ -18,13 +18,21 @@
           %tr{class: cycle('odd', 'even')}
             %th= time.strftime("%I:%M %p")
             - @schedule.each_day do |day|
-              %td.users
-                - @schedule.users_at(day.offset(relative_offset)).each do |name|
+              - names = @schedule.users_at(day.offset(relative_offset))
+              - if names.empty? or names.size == 1
+                - style = nil
+              - else
+                - percent = names.size*100/@schedule.people.size
+                - style ="background-color: hsl(0, 80%, #{100 - percent/4}%)"
+              %td.users{:style => style}
+                - names.each do |name|
                   = name
                   %br
 
   .people
     %h3 People
+    .add
+      = link_to 'Add', new_schedule_person_path(@schedule)
     %table
       %thead
         %th Name
@@ -38,5 +46,3 @@
             %td.options
               = link_to 'Edit', edit_schedule_person_path(@schedule, person)
               = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
-    .new
-      = link_to 'Add', new_schedule_person_path(@schedule)
