@@ -37,6 +37,10 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def to_param
+    uuid
+  end
+
   private
 
   def set_uuid

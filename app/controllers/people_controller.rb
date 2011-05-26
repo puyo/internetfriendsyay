@@ -39,6 +39,6 @@ class PeopleController < ApplicationController
   end
 
   def load_schedule
-    @schedule = Schedule.find(params[:schedule_id])
+    @schedule = Schedule.find_by_uuid(params[:schedule_id])
   end
 end

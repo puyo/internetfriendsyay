@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
   private
 
   def load_schedule
-    @schedule = Schedule.find(params[:id])
+    @schedule = Schedule.find_by_uuid(params[:id])
     @schedule.user = @user
   end
 end
