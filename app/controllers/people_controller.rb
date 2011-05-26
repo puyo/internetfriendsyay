@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
       redirect_to schedule_url(@schedule), notice: "#{@person.name} added"
     else
       flash.now.alert = @person.errors.full_messages.join(', ')
-      render :new
+      render 'new'
     end
   end
 
@@ -23,6 +23,7 @@ class PeopleController < ApplicationController
     if @person.update_attributes(params[:person])
       redirect_to schedule_url(@schedule)
     else
+      flash.now.alert = @person.errors.full_messages.join(', ')
       render 'edit'
     end
   end
