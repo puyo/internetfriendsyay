@@ -19,25 +19,25 @@
           - offset = day.offset(relative_offset)
           %td.check_box= check_box_tag format(available_at_field, offset), {}, person.available_at?(offset)
 
-:javascript
-  // check box drawing
+- content_for :javascript do
+  :javascript
+    // check box drawing
+    var down = false;
+    var value = false;
+    $('input[type=checkbox]').mousedown(function(event){
+      down = true;
+      value = !$(this).attr('checked');
+      $(this).attr('checked', value);
+      return false;
+    }).mouseover(function(event){
+      if (down) { $(this).attr('checked', value); }
+      return false;
+    }).change(function(){
+      return false;
+    }).click(function(){
+      return false;
+    });
 
-  var down = false;
-  var value = false;
-  $('input[type=checkbox]').mousedown(function(event){
-    down = true;
-    value = !$(this).attr('checked');
-    $(this).attr('checked', value);
-    return false;
-  }).mouseover(function(event){
-    if (down) { $(this).attr('checked', value); }
-    return false;
-  }).change(function(){
-    return false;
-  }).click(function(){
-    return false;
-  });
-
-  $(document).mouseup(function(){
-    down = false;
-  });
+    $(document).mouseup(function(){
+      down = false;
+    });

@@ -3,16 +3,21 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 
+$blueprint_grid_columns: 24
+$blueprint_grid_width: 20px
+$blueprint-grid-margin: 20px
+
 @import compass/reset
 @import compass/utilities/general/clearfix
 @import compass/css3
+@import blueprint/grid
 
 // ------------------------------------------------------------
 // layout
 
 body
   margin: 20px auto
-  width: 960px
+  width: 940px
 
 ul, ol
   margin: 0.5em 0
@@ -28,19 +33,40 @@ p
   margin: 0.5em 0
 
 // ------------------------------------------------------------
+// colours
+
+$default-fg: #444
+$link-fg: #444
+$link-hover-fg: blue
+$table-heading-fg: white
+$table-heading-bg: #605555
+$heading-fg: blue
+$highlight-bg: #f28c8c
+$notice-fg: black
+$notice-bg: $highlight-bg
+$alert-fg: #a44
+$table-odd-bg: #f4eeee
+$table-even-bg: #e4dddd
+
+// ------------------------------------------------------------
 // text
 
 +font-face("Aenigma Scrawl", font-files("/fonts/aescrawl.ttf", truetype))
+
+body
+  color: $default-fg
+  font-family: sans-serif
+  font-size: 16px
 
 =webfont
   font-family: "Aenigma Scrawl", serif
 
 =heading
   +webfont
-  color: blue
+  color: $heading-fg
   a
     text-decoration: none
-    color: blue
+    color: $heading-fg
 
 h1, h2, h3, h4
   +heading
@@ -49,16 +75,16 @@ h1, h2, h3, h4
   +webfont
 
 a
-  color: #605555
+  color: $link-fg
 
 a:hover
-  color: blue
+  color: $link-hover-fg
 
 h1
-  font-size: 300%
+  font-size: 48px
 
 h2
-  font-size: 180%
+  font-size: 28px
 
 // ------------------------------------------------------------
 // forms
@@ -68,7 +94,7 @@ h2
 
 .field_with_errors
   display: inline
-  color: #a44
+  color: $alert-fg
 
 .field.available_at
   padding-top: 10px
@@ -89,73 +115,63 @@ h2
   margin: 10px 0
 
 // ------------------------------------------------------------
-// rendering a schedule
-
-
 .schedule
-  +pie-clearfix
+  +container
 
-  .component
-    margin-bottom: 10px
+  .info
+    +column(8)
+
+    .instructions
+
+    .people
+      h2
+        float: left
+      .add
+        float: right
+        line-height: 28px
+      table
+        clear: both
 
   .timetable
-    float: left
+    +column(16, true)
     h2
       float: left
     form
       float: right
-    .users
-      min-width: 20px
+    table
+      clear: both
+      .users
+        min-width: 20px
 
-  .people
-    float: left
-    margin: 0 0 0 20px
-    h2
-      float: left
-    .add
-      float: right
+  .timetable, .people
+    table
+      width: 100%
+      font-size: 12px
+      font-family: sans-serif
+    th, td
+      padding: 2px 0.5em
+      border: 1px solid white
+      vertical-align: top
+    th
+      color: $table-heading-fg
+      background-color: $table-heading-bg
+    .odd
+      background-color: $table-odd-bg
+    .even
+      background-color: $table-even-bg
 
-  table
-    clear: both
-    font-size: 11px
-    color: #444
-    font-family: sans-serif
-  th, td
-    padding: 2px 0.5em
-    border: 1px solid white
-    vertical-align: top
-  th
-    color: white
-    background-color: #605555
-  tr.odd
-    background-color: #f4eeee
-  tr.even
-    background-color: #e4dddd
+  .component
+    margin-bottom: 20px
 
 // ------------------------------------------------------------
 
-.breadcrumb
-  padding: 0
-  li
-    display: inline
-  li:before
-    content: ' > '
-  a
-    
-// ------------------------------------------------------------
-.instructions
-  float: left
-  margin-left: 20px
-  width: 300px
-
-// ------------------------------------------------------------
 .flash
   height: 13px
-  margin: 5px 0
+  margin: 7px 0
 
   p
     margin: 0
-    padding: 1px 1em
+    padding: 2px 1em
 
   .notice, .alert
     font-size: 11px
@@ -163,7 +179,8 @@ h2
     +border-radius(5px)
 
   .notice
-    background-color: #eae
+    color: $notice-fg
+    background-color: $notice-bg
 
   .alert
     background-color: #eaa

@@ -1,5 +1,34 @@
 = div_for @schedule do
 
+  .info
+    .component.instructions
+      %h2 Instructions
+      %ol
+        %li
+          %p Share a link to this page with people, to let them add their available times.
+        %li
+          %p Come back and see what times you are all online.
+        %li
+          %p Profit!
+
+    .component.people
+      %h2 People
+      .add
+        = link_to 'Add a new person', new_schedule_person_path(@schedule)
+      %table
+        %thead
+          %th Name
+          %th Timezone
+          %th Options
+        %tbody
+          - @schedule.people.each do |person|
+            %tr{class: cycle('odd', 'even')}
+              %td.name= person.name
+              %td.timezone= person.timezone
+              %td.options
+                = link_to 'Edit', edit_schedule_person_path(@schedule, person)
+                = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
+
   .component.timetable
     %h2 Schedule
     = form_for :user, @user, :url => update_user_path do |f|
@@ -29,30 +58,3 @@
                   = name
                   %br
 
-  .component.instructions
-    %h2 Instructions
-    %ol
-      %li
-        %p Share a link to this page with people, to let them add their available times.
-      %li
-        %p Come back and see what times you are all online.
-      %li
-        %p Profit!
-
-  .component.people
-    %h2 People
-    .add
-      = link_to 'Add', new_schedule_person_path(@schedule)
-    %table
-      %thead
-        %th Name
-        %th Timezone
-        %th Options
-      %tbody
-        - @schedule.people.each do |person|
-          %tr{class: cycle('odd', 'even')}
-            %td.name= person.name
-            %td.timezone= person.timezone
-            %td.options
-              = link_to 'Edit', edit_schedule_person_path(@schedule, person)
-              = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
