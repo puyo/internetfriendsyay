@@ -1,7 +1,7 @@
 = div_for @schedule do
 
-  .timetable
-    %h3 Schedule
+  .component.timetable
+    %h2 Schedule
     = form_for :user, @user, :url => update_user_path do |f|
       = hidden_field_tag :return_to, schedule_url(@schedule)
       = f.label :timezone, 'Time Zone:'
@@ -29,8 +29,18 @@
                   = name
                   %br
 
-  .people
-    %h3 People
+  .component.instructions
+    %h2 Instructions
+    %ol
+      %li
+        %p Share a link to this page with people, to let them add their available times.
+      %li
+        %p Come back and see what times you are all online.
+      %li
+        %p Profit!
+
+  .component.people
+    %h2 People
     .add
       = link_to 'Add', new_schedule_person_path(@schedule)
     %table

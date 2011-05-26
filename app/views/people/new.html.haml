@@ -1,6 +1,4 @@
-%ul.breadcrumb
-  %li= link_to 'Schedule', @schedule
-  %li New person
+%h2 New Person
 
 = form_for [@schedule, @person] do |f|
   = render partial: 'people/form', locals: { person: @person, form: f, available_at_field: 'person[available_at[%d]]' }
