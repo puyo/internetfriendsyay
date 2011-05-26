@@ -3,7 +3,6 @@
   %head
     %title Internet Friends Yay
     = include_stylesheets :screen, :media => 'all'
-    = include_javascripts :screen
     = csrf_meta_tag
   %body
     .title
@@ -20,3 +19,5 @@
           %p= alert
 
     = yield
+
+    = include_javascripts :screen

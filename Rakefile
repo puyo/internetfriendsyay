@@ -6,3 +6,7 @@ require 'rake'
 require 'fileutils'
 
 InternetFriendsYay::Application.load_tasks
+
+task :deploy do
+  sh 'compass compile && jammit -f && git add -f public/assets && git commit -m "Jammit assets" && git push heroku && git reset HEAD^'
+end
