@@ -8,5 +8,13 @@ require 'fileutils'
 InternetFriendsYay::Application.load_tasks
 
 task :deploy do
-  sh 'compass compile && jammit -f && git add -f public/assets && git commit -m "Jammit assets" && git push heroku && git reset HEAD^'
+  sh 'compass compile'
+  sh 'jammit -f'
+  sh 'git add -f public/assets'
+  sh 'git commit -m "Jammit assets"'
+  begin
+    sh 'git push heroku'
+  ensure
+    sh 'git reset HEAD^'
+  end
 end
