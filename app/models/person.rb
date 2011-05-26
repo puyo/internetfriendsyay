@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
   belongs_to :schedule
-  validates_length_of :name, :minimum => 1
+  validates_length_of :name, :minimum => 1, :maximum => 20
   validates_uniqueness_of :name, :scope => :schedule_id
   validates_inclusion_of :timezone, :in => ActiveSupport::TimeZone.zones_map.keys #TZInfo::Timezone.all.map(&:name)
 
