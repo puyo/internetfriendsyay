@@ -15,7 +15,7 @@ class SchedulesController < ApplicationController
       redirect_to schedule_url(@schedule), :notice => 'Schedule created'
     else
       flash.now.alert = @schedule.errors.full_messages.join(', ')
-      render :new
+      render 'new'
     end
   end
 
