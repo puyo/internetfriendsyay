@@ -13,7 +13,7 @@ task :deploy do
   sh 'git add -f public/assets'
   sh 'git commit -m "Jammit assets"'
   begin
-    sh 'git push heroku'
+    sh 'git push -f heroku'
   ensure
     sh 'git reset HEAD^'
   end
