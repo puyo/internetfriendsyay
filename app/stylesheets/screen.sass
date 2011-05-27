@@ -37,12 +37,15 @@ $table-heading-fg: $default-fg
 $table-heading-bg: #c4bcbc
 $table-light-bg: #f4eeee
 $table-dark-bg: #e4dddd
+$highlight-fg: black
 $highlight-bg: #f28c8c
 
 =notice-color
-  background-color: $table-dark-bg
+  color: $highlight-fg
+  background-color: $highlight-bg
 
 =alert-color
+  color: $highlight-fg
   background-color: $highlight-bg
 
 =table-heading-color
@@ -187,6 +190,7 @@ h2
     padding: 2px 1em
 
   .notice, .alert
+    text-align: center
     font-size: 11px
     font-weight: bold
     +border-radius(5px)
