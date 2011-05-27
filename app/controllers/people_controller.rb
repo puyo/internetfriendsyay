@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
   def create
     @person = @schedule.people.new(params[:person])
     if @person.save
-      redirect_to schedule_url(@schedule), notice: "#{@person.name} added"
+      redirect_to schedule_url(@schedule), notice: "Person #{@person.name.inspect} added"
     else
       flash.now.alert = @person.errors.full_messages.join(', ')
       render 'new'
@@ -30,7 +30,7 @@ class PeopleController < ApplicationController
 
   def destroy
     @person.destroy
-    redirect_to @schedule, notice: "#{@person.name} removed"
+    redirect_to @schedule, notice: "Person #{@person.name.inspect} removed"
   end
 
   private
