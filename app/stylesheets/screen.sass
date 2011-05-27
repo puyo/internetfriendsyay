@@ -13,6 +13,9 @@ body
   margin: 20px auto
   width: 940px
 
+header, article, footer
+  margin: 20px 0
+
 ul, ol
   margin: 0.5em 0
   padding: 0 0 0 40px
@@ -41,8 +44,7 @@ $highlight-fg: black
 $highlight-bg: #f28c8c
 
 =notice-color
-  color: $highlight-fg
-  background-color: $highlight-bg
+  background-color: $table-heading-bg
 
 =alert-color
   color: $highlight-fg
@@ -149,7 +151,8 @@ h2
           white-space: nowrap
 
   .component.timetable
-    +column(16, true)
+    +column(16)
+    +last
     h2
       float: left
     form
@@ -181,22 +184,37 @@ h2
     margin-bottom: 20px
 
 // ------------------------------------------------------------
-.flash
-  height: 13px
-  margin: 7px 0
+header
+  +container
 
-  p
-    margin: 0
-    padding: 2px 1em
+  .title
+    +column(12)
 
-  .notice, .alert
-    text-align: center
-    font-size: 11px
-    font-weight: bold
-    +border-radius(5px)
+  .flash
+    +column(12)
+    +last
 
-  .notice
-    +notice-color
+    p
+      margin: 0
+      padding: 5px 1em
 
-  .alert
-    +alert-color
+    .notice, .alert
+      text-align: center
+      font-size: 11px
+      font-weight: bold
+      +border-radius(5px)
+      line-height: 54px
+
+    .notice
+      +notice-color
+
+    .alert
+      +alert-color
+
+// ------------------------------------------------------------
+footer
+  font-size: 13px
+  text-align: right
+  color: #888
+  border-top: 1px dashed #888
+  padding: 20px 0.5em

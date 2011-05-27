@@ -5,20 +5,25 @@
     = include_stylesheets :screen, :media => 'all'
     = csrf_meta_tag
   %body
-    .title
-      %h1= link_to 'Internet Friends Yay', root_url
-      .byline
-        An application for herding virtual cats.
-    
-    .flash
-      - if flash.notice
-        .notice
-          %p= notice
-      - if flash.alert
-        .alert
-          %p= alert
+    %header
+      .title
+        %h1= link_to 'Internet Friends Yay', root_url
+        .byline
+          An application for herding virtual cats.
 
-    = yield
+      .flash
+        - if flash.notice
+          .notice
+            %p= notice
+        - if flash.alert
+          .alert
+            %p= alert
+
+    %article
+      = yield
+
+    %footer
+      a web app by #{link_to 'Gregory McIntyre', 'http://gregorymcintyre.com'} with <tt>&lt;3</tt>
 
     = include_javascripts :screen
     = yield :javascript
