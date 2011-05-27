@@ -9,15 +9,14 @@
   %thead
     %tr
       %th
-      - @schedule.each_day do |day|
-        %th.heading= day.name[0,2]
+      - @schedule.day_names.each do |name|
+        %th.heading= name[0,2]
   %tbody
-    - @schedule.each_time_of_day do |relative_offset, time|
+    - @schedule.times_of_day.each_with_index do |time, time_of_day_index|
       %tr{:class => cycle('odd', 'even')}
         %th= time.strftime('%I:%M %p')
-        - @schedule.each_day do |day|
-          - offset = day.offset(relative_offset)
-          %td.check_box= check_box_tag format(available_at_field, offset), {}, person.available_at?(offset)
+        - @schedule.day_indexes(time_of_day_index).each do |index|
+          %td.check_box= check_box_tag format(available_at_field, index), {}, person.available_at?(index)
 
 - content_for :javascript do
   :javascript

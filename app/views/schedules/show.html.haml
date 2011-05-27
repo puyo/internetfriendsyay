@@ -40,21 +40,21 @@
       %thead
         %tr
           %th
-          - @schedule.each_day do |day|
-            %th.heading= day.name
+          - @schedule.day_names.each do |name|
+            %th.heading= name
       %tbody
-        - @schedule.each_time_of_day do |relative_offset, time|
+        - @schedule.times_of_day.each_with_index do |time, time_of_day_index|
           %tr{class: cycle('odd', 'even')}
             %th= time.strftime("%I:%M %p")
-            - @schedule.each_day do |day|
-              - names = @schedule.users_at(day.offset(relative_offset))
-              - if names.empty? or names.size == 1
+            - @schedule.day_indexes(time_of_day_index).each do |index|
+              - people = @people_at_indexes[index]
+              - if people.empty? or people.size == 1
                 - style = nil
               - else
-                - percent = names.size*100/@schedule.people.size
+                - percent = people.size*100/@schedule.people.size
                 - style ="background-color: hsl(0, 80%, #{100 - percent/4}%)"
-              %td.users{:style => style}
-                - names.each do |name|
-                  = name
+              %td.entry{:style => style}
+                - people.each do |person|
+                  = person.name
                   %br
 

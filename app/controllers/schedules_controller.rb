@@ -23,6 +23,6 @@ class SchedulesController < ApplicationController
 
   def load_schedule
     @schedule = Schedule.find_by_uuid(params[:id])
-    @schedule.user = @user
+    @people_at_indexes = @schedule.people_at_indexes(@user.timezone)
   end
 end

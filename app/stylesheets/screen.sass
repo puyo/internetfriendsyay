@@ -145,7 +145,7 @@ h2
         .options
           white-space: nowrap
 
-  .timetable
+  .component.timetable
     +column(16, true)
     h2
       float: left
@@ -153,25 +153,26 @@ h2
       float: right
     table
       clear: both
-      .users
+      .entry
         min-width: 20px
 
-  .timetable, .people
-    table
-      width: 100%
-      font-size: 12px
-      font-family: sans-serif
-    th, td
-      padding: 2px 0.5em
-      border: 1px solid white
-      vertical-align: top
-    th
-      +table-heading-color
-      white-space: nowrap
-    .odd
-      background-color: $table-light-bg
-    .even
-      background-color: $table-dark-bg
+  .component
+    &.timetable, &.people
+      table
+        width: 100%
+        font-size: 12px
+        font-family: sans-serif
+      th, td
+        padding: 2px 0.5em
+        border: 1px solid white
+        vertical-align: top
+      th
+        +table-heading-color
+        white-space: nowrap
+      .odd
+        background-color: $table-light-bg
+      .even
+        background-color: $table-dark-bg
 
   .component
     margin-bottom: 20px

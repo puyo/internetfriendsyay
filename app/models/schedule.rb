@@ -3,38 +3,43 @@ class Schedule < ActiveRecord::Base
   before_create :set_uuid
   accepts_nested_attributes_for :people
 
-  attr_reader :person_offsets
+  HOURS_PER_DAY = 24
+  INDEXES_PER_HOUR = 2
+  INDEXES_PER_DAY = HOURS_PER_DAY * INDEXES_PER_HOUR
+  INDEXES_PER_WEEK = 7 * INDEXES_PER_DAY
+  MINUTES_PER_INDEX = 60 / INDEXES_PER_HOUR
 
-  def user=(user)
-    target = ActiveSupport::TimeZone.new(user.timezone)
-    target_mon = Day.next_monday(target)
-    @users_at_offset = Hash.new{|h,k| h[k] = [] }
+  def people_at_indexes(timezone)
+    result = Hash.new{|h,k| h[k] = [] }
+    monday = next_monday(timezone)
     people.each do |person|
-      source = ActiveSupport::TimeZone.new(person.timezone)
-      source_mon = Day.next_monday(source)
-      times = person.relative_offsets.map{|offset| source_mon + offset*60*30 }
-      times.each do |time|
-        offset = (time.to_i - target_mon.to_i)/(60*30) % (Day::OFFSETS_PER_WEEK)
-        @users_at_offset[offset].push(person.name)
+      person_mon = next_monday(person.timezone)
+      index_offset = (person_mon.to_i - monday.to_i)/(60*MINUTES_PER_INDEX)
+      person.available_indexes.each do |person_index|
+        index = (person_index + index_offset) % INDEXES_PER_WEEK
+        result[index].push(person)
       end
     end
+    result
   end
 
-  def users_at(offset)
-    @users_at_offset[offset]
-  end
-
-  def each_time_of_day
-    Day::TIME_OFFSETS.each do |offset|
-      hours, mins = (offset * Day::TIME_INTERVAL).divmod(60)
-      yield offset, Time.new(2000, 1, 1, hours, mins)
+  def times_of_day
+    (0...INDEXES_PER_DAY).map do |time_of_day_index|
+      hours, mins = (time_of_day_index * MINUTES_PER_INDEX).divmod(60)
+      Time.new(2000, 1, 1, hours, mins)
     end
   end
 
-  def each_day
-    Day::ALL.each do |day|
-      yield day
+  def day_names
+    %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
+  end
+
+  def day_indexes(time_of_day_index)
+    result = []
+    day_names.each_with_index do |name, day_index|
+      result << day_index*INDEXES_PER_DAY + time_of_day_index
     end
+    result
   end
 
   def to_param
@@ -46,5 +51,15 @@ class Schedule < ActiveRecord::Base
   def set_uuid
     require 'digest/md5'
     self.uuid = Digest::MD5.hexdigest(id.to_s + Time.now.to_s)
+  end
+
+  def next_monday(tz_name)
+    tz = ActiveSupport::TimeZone.new(tz_name)
+    result = tz.now
+    while not result.monday?
+      result += 60*60*24 # one day
+    end
+    result = Time.utc(result.year, result.month, result.day) # round off minutes and seconds
+    tz.tzinfo.local_to_utc(result)
   end
 end
