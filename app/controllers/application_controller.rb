@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :load_user
+
+  protected
+
+  attr_reader :user
   
   private
 

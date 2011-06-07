@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   before_filter :load_person, only: [:edit, :update, :destroy]
 
   def new
-    @person = @schedule.people.build(timezone: @user.timezone)
+    @person = @schedule.people.build(timezone: user.timezone)
   end
 
   def create
