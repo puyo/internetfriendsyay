@@ -8,3 +8,5 @@ junk
 .DS_Store
 tags
 public/assets
+coverage
+coverage.data

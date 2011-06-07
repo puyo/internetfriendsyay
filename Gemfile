@@ -10,7 +10,8 @@ gem 'compass', '~> 0.11'   # sass mixins and generators
 gem 'rake', '0.8.7'        # rails 3.0 doesn't work with rake 0.9
 
 gem 'ruby-debug19', :group => [:development, :test]
-gem 'rspec-rails', :group => [:development, :test]
+gem 'rspec-rails', :group => [:test]
+gem 'cover_me', :group => [:test]
 
 gem 'thin', :require => nil
 gem 'heroku', :require => nil
