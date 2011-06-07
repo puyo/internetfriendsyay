@@ -1,7 +1,7 @@
 task :deploy do
   # Package assets for production deployment via git push to heroku.
-  sh 'compass compile'
-  sh 'jammit -f'
+  sh 'bundle exec compass compile'
+  sh 'bundle exec jammit -f'
   sh 'git add -f public/assets'
   sh 'git commit -m "Jammit assets"'
   begin
