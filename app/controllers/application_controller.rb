@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protected
 
   attr_reader :user
-  
+
   private
 
   def load_user
