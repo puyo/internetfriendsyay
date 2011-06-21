@@ -1,8 +1,6 @@
 class SchedulesController < ApplicationController
   before_filter :load_schedule, :only => [:show]
 
-  respond_to :html
-
   def show
   end
 
@@ -15,10 +13,12 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(params[:schedule])
     if @schedule.save
       flash.notice = 'Schedule created'
+      redirect_to @schedule
     else
       flash.alert = @schedule.errors.full_messages.join(', ')
+      @person = @schedule.people.first
+      render 'new'
     end
-    respond_with(@schedule)
   end
 
   private

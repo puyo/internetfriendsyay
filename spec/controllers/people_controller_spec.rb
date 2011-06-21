@@ -47,7 +47,7 @@ describe PeopleController do
         specify { flash.alert.should be_present }
       end
       describe 'response' do
-        specify { response.should_not be_redirect }
+        specify { response.should render_template('new') }
       end
       describe '@person' do
         specify { assigns[:person].should be_present }
@@ -77,6 +77,9 @@ describe PeopleController do
       end
       describe 'flash.alert' do
         specify { flash.alert.should be_present }
+      end
+      describe 'response' do
+        specify { response.should render_template('edit') }
       end
       describe '@person' do
         specify { assigns[:person].should be_present }

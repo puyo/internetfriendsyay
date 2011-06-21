@@ -4,7 +4,7 @@ describe SchedulesController do
   let(:schedule) { mock_model(Schedule, to_param: '1', people: people) }
   let(:user) { mock('user', timezone: 'Fishbuckland') }
   let(:person) { mock_model(Person, name: 'Fishbuck') }
-  let(:people) { mock('people', build: person) }
+  let(:people) { mock('people', build: person, first: person) }
   let(:people_at_indexes) { mock('people at indexes') }
 
   before do
@@ -55,8 +55,11 @@ describe SchedulesController do
       describe 'flash.alert' do
         specify { flash.alert.should be_present }
       end
+      describe '@schedule, @person' do
+        specify { assigns.values_at(:schedule, :person).should == [schedule, person] }
+      end
       describe 'response' do
-        specify { response.should_not be_redirect }
+        specify { response.should render_template('new') }
       end
     end
   end

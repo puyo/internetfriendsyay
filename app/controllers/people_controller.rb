@@ -2,8 +2,6 @@ class PeopleController < ApplicationController
   before_filter :load_schedule
   before_filter :load_person, only: [:edit, :update, :destroy]
 
-  respond_to :html
-
   def new
     @person = @schedule.people.build(timezone: user.timezone)
   end
@@ -12,10 +10,11 @@ class PeopleController < ApplicationController
     @person = @schedule.people.new(params[:person])
     if @person.save
       flash.notice = "Person #{@person.name.inspect} added"
+      redirect_to @schedule
     else
       flash.alert = @person.errors.full_messages.join(', ')
+      render 'new'
     end
-    respond_with(@schedule, @person)
   end
 
   def edit
@@ -24,16 +23,17 @@ class PeopleController < ApplicationController
   def update
     if @person.update_attributes(params[:person])
       flash.notice = "Person #{@person.name.inspect} updated"
+      redirect_to @schedule
     else
       flash.alert = @person.errors.full_messages.join(', ')
+      render 'edit'
     end
-    respond_with(@schedule, @person)
   end
 
   def destroy
     @person.destroy
     flash.notice = "Person #{@person.name.inspect} removed"
-    respond_with(@schedule, @person)
+    redirect_to @schedule
   end
 
   private
