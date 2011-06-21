@@ -1,6 +1,6 @@
 %h2 Edit Person
 
-= form_for [@schedule, @person] do |f|
-  = render partial: 'people/form', locals: { person: @person, form: f, available_at_field: 'person[available_at[%d]]' }
+= form_for [@schedule, @person] do |person_form|
+  = render 'people/form', schedule: @schedule, person: @person, form: person_form, available_at_field: 'person[available_at[%d]]'
   .buttons
     = f.submit

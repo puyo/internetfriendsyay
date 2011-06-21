@@ -15,7 +15,7 @@
     - Schedule::TIMES_OF_DAY.each_with_index do |time, time_of_day_index|
       %tr{:class => cycle('odd', 'even')}
         %th= time.strftime('%I:%M %p')
-        - @schedule.day_indexes(time_of_day_index).each do |index|
+        - schedule.day_indexes(time_of_day_index).each do |index|
           %td.check_box= check_box_tag format(available_at_field, index), {}, person.available_at?(index)
 
 - content_for :javascript do
