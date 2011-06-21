@@ -1,29 +1,42 @@
 require 'spec_helper'
 
 describe SchedulesController do
-  let(:schedule) { mock_model(Schedule, people: people, to_param: '1') }
+  let(:schedule) { mock_model(Schedule, to_param: '1', people: people) }
   let(:user) { mock('user', timezone: 'Fishbuckland') }
+  let(:person) { mock_model(Person, name: 'Fishbuck') }
+  let(:people) { mock('people', build: person) }
+  let(:people_at_indexes) { mock('people at indexes') }
 
   before do
     controller.stub(user: user)
     Schedule.stub(:find_by_uuid).with('1').and_return(schedule)
+    Schedule.stub(new: schedule)
+    schedule.stub(:people_at_indexes).with(user.timezone).and_return(people_at_indexes)
+  end
+
+  describe '#show' do
+    before do
+      get :show, id: '1'
+    end
+    describe '@schedule, @people_at_indexes' do
+      specify { assigns.values_at(:schedule, :people_at_indexes).should == [schedule, people_at_indexes] }
+    end
   end
 
   describe '#new' do
     before do
-      people.stub(:build).with(timezone: user.timezone).and_return(person)
-      get :new, schedule_id: 1
+      get :new
     end
-    describe '@person' do
-      specify { assigns[:person].should == person }
+    describe '@schedule, @person' do
+      specify { assigns.values_at(:schedule, :person).should == [schedule, person] }
     end
   end
 
   describe '#create' do
     context 'with valid params' do
       before do
-        person.stub(save: true)
-        post :create, schedule_id: 1, person: {}
+        schedule.stub(save: true)
+        post :create, id: '1', schedule: {}
       end
       describe 'flash.notice' do
         specify { flash.notice.should be_present }
@@ -35,9 +48,9 @@ describe SchedulesController do
 
     context 'with invalid params' do
       before do
-        person.stub(save: false)
-        person.errors.add(:name, 'cannot be blank')
-        post :create, schedule_id: 1, person: {}
+        schedule.stub(save: false)
+        schedule.errors.add(:name, 'cannot be blank')
+        post :create, id: '1', schedule: {}
       end
       describe 'flash.alert' do
         specify { flash.alert.should be_present }
@@ -45,41 +58,6 @@ describe SchedulesController do
       describe 'response' do
         specify { response.should_not be_redirect }
       end
-    end
-  end
-
-  describe '#update' do
-    context 'with valid params' do
-      before do
-        person.stub(update_attributes: true)
-        put :update, schedule_id: 1, id: 1, person: {}
-      end
-      describe 'flash.notice' do
-        specify { flash.notice.should be_present }
-      end
-      describe 'response' do
-        specify { response.should be_redirect }
-      end
-    end
-
-    context 'with invalid params' do
-      before do
-        person.stub(update_attributes: false)
-        person.errors.add(:name, 'cannot be blank')
-        put :update, schedule_id: 1, id: 1, person: {}
-      end
-      describe 'flash.alert' do
-        specify { flash.alert.should be_present }
-      end
-    end
-  end
-
-  describe '#destroy' do
-    before do
-      delete :destroy, schedule_id: 1, id: 1
-    end
-    describe 'flash.notice' do
-      specify{ flash.notice.should be_present }
     end
   end
 end

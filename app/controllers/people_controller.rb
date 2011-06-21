@@ -6,7 +6,6 @@ class PeopleController < ApplicationController
 
   def new
     @person = @schedule.people.build(timezone: user.timezone)
-    respond_with(@schedule, @person)
   end
 
   def create
@@ -20,7 +19,6 @@ class PeopleController < ApplicationController
   end
 
   def edit
-    respond_with(@schedule, @person)
   end
 
   def update

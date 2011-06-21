@@ -9,10 +9,10 @@
   %thead
     %tr
       %th
-      - @schedule.day_names.each do |name|
+      - Schedule::DAY_NAMES.each do |name|
         %th.heading= name[0,2]
   %tbody
-    - @schedule.times_of_day.each_with_index do |time, time_of_day_index|
+    - Schedule::TIMES_OF_DAY.each_with_index do |time, time_of_day_index|
       %tr{:class => cycle('odd', 'even')}
         %th= time.strftime('%I:%M %p')
         - @schedule.day_indexes(time_of_day_index).each do |index|

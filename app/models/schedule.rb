@@ -9,6 +9,13 @@ class Schedule < ActiveRecord::Base
   INDEXES_PER_WEEK = 7 * INDEXES_PER_DAY
   MINUTES_PER_INDEX = 60 / INDEXES_PER_HOUR
 
+  TIMES_OF_DAY = (0...INDEXES_PER_DAY).map do |time_of_day_index|
+    hours, mins = (time_of_day_index * MINUTES_PER_INDEX).divmod(60)
+    Time.new(2000, 1, 1, hours, mins)
+  end
+
+  DAY_NAMES = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
+
   def people_at_indexes(timezone)
     result = Hash.new{|h,k| h[k] = [] }
     monday = next_monday(timezone)
@@ -23,23 +30,8 @@ class Schedule < ActiveRecord::Base
     result
   end
 
-  def times_of_day
-    (0...INDEXES_PER_DAY).map do |time_of_day_index|
-      hours, mins = (time_of_day_index * MINUTES_PER_INDEX).divmod(60)
-      Time.new(2000, 1, 1, hours, mins)
-    end
-  end
-
-  def day_names
-    %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday]
-  end
-
   def day_indexes(time_of_day_index)
-    result = []
-    day_names.each_with_index do |name, day_index|
-      result << day_index*INDEXES_PER_DAY + time_of_day_index
-    end
-    result
+    (time_of_day_index...(time_of_day_index+INDEXES_PER_WEEK)).step(INDEXES_PER_DAY)
   end
 
   def to_param

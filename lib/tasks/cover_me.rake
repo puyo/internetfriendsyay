@@ -5,4 +5,4 @@ namespace :cover_me do
   end
 end
 
-task :cov => [:test, 'cover_me:report']
+task :cov => 'cover_me:report'
