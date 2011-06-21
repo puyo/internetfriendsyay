@@ -1,4 +1,4 @@
-task :cover_me do
+task :coverme do
   require 'cover_me'
 
   ENV['COVER_ME'] = 'true'
