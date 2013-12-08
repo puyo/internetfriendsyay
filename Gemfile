@@ -7,7 +7,7 @@ gem 'rails', '~> 4.0.2'
 gem 'capistrano', group: %w[cli]                        # deploy scripts
 gem 'capistrano_colors', group: %w[cli]                 # coloured output for capistrano
 gem 'coffee-rails'                                      # coffeescript
-gem 'compass-rails', git: 'git@github.com:Compass/compass-rails.git', branch: 'master'
+gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
 gem 'simplecov', group: %w[test], require: nil
 gem 'database_cleaner', group: %w[test]                 # manage database truncation/transactions
 gem 'guard', group: %w[cli]                             # run commands when files change
@@ -27,6 +27,8 @@ gem 'sass-rails'                                        # css preprocessor
 gem 'schema_plus'                                       # foreign key constraints and other goodies
 gem 'sdoc', require: false, group: %w[doc]              # static documentation generator
 gem 'thin', group: %w[cli]                              # load balancer and faye friendly web server
+gem 'foreman', group: %w[cli]                           # handle procfile
+gem 'unicorn', group: %w[cli]                           # web server
 gem 'uglifier'                                          # js compressor
 gem 'normalize-rails'
-
+gem 'rails_12factor'
