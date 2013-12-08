@@ -31,7 +31,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def day_indexes(time_of_day_index)
-    (time_of_day_index...(time_of_day_index+INDEXES_PER_WEEK)).step(INDEXES_PER_DAY)
+    (time_of_day_index...(time_of_day_index+INDEXES_PER_WEEK)).step(INDEXES_PER_DAY).to_a
   end
 
   def to_param

@@ -1,15 +1,32 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '~> 3.0.20'
-gem 'mysql2', '< 0.3'        # database
-gem 'foreigner', '~> 1.0.3'  # foreign key constraints
-gem 'haml-rails', '~> 0.3.4' # use haml as templating engine
-gem 'jammit', '~> 0.6.3'     # asset packaging
-gem 'compass', '~> 0.11.1'   # sass mixins and generators
-#gem 'rake', '~> 0.8.7'       # rails 3.0 doesn't work with rake 0.9
+ruby '2.0.0'
 
-gem 'ruby-debug19', :group => [:development, :test]
-gem 'rspec-rails', :group => [:development, :test]
-gem 'cover_me', :group => :development, :require => nil
-gem 'thin', :group => :development, :require => nil
-gem 'heroku', :group => :development, :require => nil
+gem 'rails', '~> 4.0.2'
+
+gem 'capistrano', group: %w[cli]                        # deploy scripts
+gem 'capistrano_colors', group: %w[cli]                 # coloured output for capistrano
+gem 'coffee-rails'                                      # coffeescript
+gem 'compass-rails', git: 'git@github.com:Compass/compass-rails.git', branch: 'master'
+gem 'simplecov', group: %w[test], require: nil
+gem 'database_cleaner', group: %w[test]                 # manage database truncation/transactions
+gem 'guard', group: %w[cli]                             # run commands when files change
+gem 'guard-livereload', group: %w[cli]                  # reload the web browser when source files change
+gem 'guard-rspec', group: %w[cli]                       # rerun tests when files change
+gem 'haml-rails'                                        # html templates
+gem 'heroku', group: :development, require: nil
+gem 'interactive_editor', group: %w[console]            # irb interactive editing
+gem 'jazz_hands', groups: %w[development test]          # break on 'binding.pry' in code
+gem 'jquery-rails'                                      # jquery
+gem 'oj'                                                # fast json parser
+gem 'pg'                                                # database driver
+gem 'quiet_assets', group: %w[development test]         # don't log asset pipeline requests
+gem 'rack-livereload', group: %w[development]           # transparent livereload client
+gem 'rspec-rails', group: %w[test], require: false      # test framework
+gem 'sass-rails'                                        # css preprocessor
+gem 'schema_plus'                                       # foreign key constraints and other goodies
+gem 'sdoc', require: false, group: %w[doc]              # static documentation generator
+gem 'thin', group: %w[cli]                              # load balancer and faye friendly web server
+gem 'uglifier'                                          # js compressor
+gem 'normalize-rails'
+

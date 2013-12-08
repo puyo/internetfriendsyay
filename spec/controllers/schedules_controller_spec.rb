@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe SchedulesController do
   let(:schedule) { mock_model(Schedule, to_param: '1', people: people) }
-  let(:user) { mock('user', timezone: 'Fishbuckland') }
+  let(:user) { double('user', timezone: 'Fishbuckland') }
   let(:person) { mock_model(Person, name: 'Fishbuck') }
-  let(:people) { mock('people', build: person, first: person) }
-  let(:people_at_indexes) { mock('people at indexes') }
+  let(:people) { double('people', build: person, first: person) }
+  let(:people_at_indexes) { double('people at indexes') }
 
   before do
     controller.stub(user: user)
@@ -36,7 +36,7 @@ describe SchedulesController do
     context 'with valid params' do
       before do
         schedule.stub(save: true)
-        post :create, id: '1', schedule: {}
+        post :create, id: '1', schedule: {people_at_indexes: []}
       end
       describe 'flash.notice' do
         specify { flash.notice.should be_present }
@@ -50,7 +50,7 @@ describe SchedulesController do
       before do
         schedule.stub(save: false)
         schedule.errors.add(:name, 'cannot be blank')
-        post :create, id: '1', schedule: {}
+        post :create, id: '1', schedule: {people_at_indexes: []}
       end
       describe 'flash.alert' do
         specify { flash.alert.should be_present }

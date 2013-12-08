@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = @schedule.people.new(params[:person])
+    @person = @schedule.people.new(person_params)
     if @person.save
       flash.notice = "Person #{@person.name.inspect} added"
       redirect_to @schedule
@@ -21,7 +21,7 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update_attributes(params[:person])
+    if @person.update_attributes(person_params)
       flash.notice = "Person #{@person.name.inspect} updated"
       redirect_to @schedule
     else
@@ -44,5 +44,9 @@ class PeopleController < ApplicationController
 
   def load_schedule
     @schedule = Schedule.find_by_uuid(params[:schedule_id])
+  end
+
+  def person_params
+    params.require(:person).permit!
   end
 end

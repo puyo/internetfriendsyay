@@ -31,11 +31,13 @@
 
   .component.timetable
     %h2 Schedule
-    = form_for :user, @user, :url => update_user_path do |f|
+
+    = form_for @user, url: user_path, method: :patch do |f|
       = hidden_field_tag :return_to, schedule_url(@schedule)
       = f.label :timezone, 'Time Zone:'
       = f.time_zone_select :timezone, /Australia/
       = f.submit 'Update'
+
     %table
       %thead
         %tr

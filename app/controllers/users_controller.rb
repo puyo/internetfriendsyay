@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def update
     session[:user] = user = User.new(params[:user])
     flash.notice = "Timezone changed to #{user.timezone.inspect}"

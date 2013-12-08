@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-describe UserController do
-  let(:user) { mock('user', timezone: 'Fishbuckland') }
-
+describe UsersController do
+  let(:user) { double('user', timezone: 'Fishbuckland') }
   describe '#update' do
     let(:request_params) { { user: {timezone: 'foobar'} } }
     before do

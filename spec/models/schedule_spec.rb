@@ -34,8 +34,8 @@ describe Schedule do
 
     context 'with a person at time index 0 Sydney time, and a person at time indexes 0 and 1 Sydney time' do
       before do
-        people << mock('person1', timezone: 'Sydney', available_indexes: [0])
-        people << mock('person2', timezone: 'Sydney', available_indexes: [0, 1])
+        people << double('person1', timezone: 'Sydney', available_indexes: [0])
+        people << double('person2', timezone: 'Sydney', available_indexes: [0, 1])
       end
 
       context 'in Sydney time' do

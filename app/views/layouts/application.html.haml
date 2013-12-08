@@ -1,8 +1,8 @@
-!!! 5
+!!!
 %html
   %head
     %title Internet Friends Yay
-    = include_stylesheets :screen, :media => 'all'
+    = stylesheet_link_tag 'app', media: 'all'
     = csrf_meta_tag
   %body
     %header
@@ -28,5 +28,5 @@
       %p
         please #{link_to 'report', 'https://github.com/puyo/internetfriendsyay/issues/new'} any problems
 
-    = include_javascripts :screen
+    = javascript_include_tag 'app'
     = yield :javascript

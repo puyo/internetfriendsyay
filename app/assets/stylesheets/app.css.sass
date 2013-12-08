@@ -1,4 +1,6 @@
-@import compass/reset
+//= require normalize-rails
+//= require_self
+
 @import compass/css3
 @import blueprint/grid
 
@@ -8,29 +10,6 @@
 $blueprint_grid_columns: 24
 $blueprint_grid_width: 20px
 $blueprint-grid-margin: 20px
-
-body
-  margin: 20px auto
-  width: 940px
-
-header, article, footer
-  margin: 20px 0
-
-ul, ol
-  margin: 0.5em 0
-  padding: 0 0 0 40px
-
-ul
-  list-style-type: disc
-
-ol
-  list-style-type: decimal
-
-p
-  margin: 0.5em 0
-
-// ------------------------------------------------------------
-// color
 
 $default-fg: #444
 $heading-fg: blue
@@ -54,77 +33,59 @@ $highlight-bg: #f28c8c
   color: $table-heading-fg
   background-color: $table-heading-bg
 
-// ------------------------------------------------------------
-// text
-
-+font-face("Aenigma Scrawl", font-files("/fonts/aescrawl.ttf", truetype))
-
-body
-  color: $default-fg
-  font-family: Verdana, Arial, Helvetica, sans-serif
-  font-size: 16px
-
-=webfont
-  font-family: "Aenigma Scrawl", serif
-
 =heading
-  +webfont
   color: $heading-fg
   a
     text-decoration: none
     color: $heading-fg
 
+// ------------------------------------------------------------
+// baseline
+
+body
+  margin: 20px auto
+  width: 940px
+  color: $default-fg
+  font-family: Verdana, Arial, Helvetica, sans-serif
+  font-size: 16px
+
+header, article, footer
+  margin: 20px 0
+
 h1, h2, h3, h4
   +heading
 
-.byline
-  +webfont
-
-a
-  color: $link-fg
-
-a:hover
-  color: $link-hover-fg
-
-h1
-  font-size: 48px
-
-h2
-  font-size: 28px
-
 // ------------------------------------------------------------
-=form
-  .field
-    margin: 10px 0
+// forms
 
-    .field_with_errors
-      display: inline
-      padding: 5px 0.5em
-      +alert-color
-      +border-radius(5px)
+.buttons
+  margin: 10px 0
 
-  .field.available_at
-    padding-top: 10px
-    font-size: 12px
-    .heading
-      +transform(rotate(-50deg))
-      max-width: 10px
-      position: relative
-      bottom: 5px
-    .check_box
+.field
+  margin: 10px 0
+
+.field_with_errors
+  display: inline
+  padding: 5px 0.5em
+  +alert-color
+  +border-radius(5px)
+
+.field.available_at
+  font-size: 12px
+  margin-top: 20px
+  .heading
+    +transform(rotate(-50deg))
+    max-width: 10px
+    position: relative
+  .check_box
+    padding: 0
+    margin: 0
+    input
       padding: 0
       margin: 0
-      input
-        padding: 0
-        margin: 0
-
-  .buttons
-    margin: 10px 0
-
-.new_schedule, .new_person, .edit_person
-  +form
 
 // ------------------------------------------------------------
+
 .welcome
   +container
   p
@@ -182,11 +143,14 @@ h2
     margin-bottom: 20px
 
 // ------------------------------------------------------------
+
 header
   +container
 
   .title
     +column(12)
+    h1
+      margin: 0
 
   .flash
     +column(12)
@@ -210,8 +174,10 @@ header
       +alert-color
 
 // ------------------------------------------------------------
+
 footer
   font-size: 13px
   text-align: right
   color: #888
   border-top: 1px dashed #888
+
