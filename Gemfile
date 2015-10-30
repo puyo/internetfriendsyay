@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.3'
 
-gem 'rails', '~> 4.0.2'
+gem 'rails', '~> 4.2.4'
 
 gem 'capistrano', group: %w[cli]                        # deploy scripts
 gem 'capistrano_colors', group: %w[cli]                 # coloured output for capistrano
 gem 'coffee-rails'                                      # coffeescript
 gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
+gem 'compass-blueprint'
 gem 'simplecov', group: %w[test], require: nil
 gem 'database_cleaner', group: %w[test]                 # manage database truncation/transactions
 gem 'guard', group: %w[cli]                             # run commands when files change
@@ -16,7 +17,8 @@ gem 'guard-rspec', group: %w[cli]                       # rerun tests when files
 gem 'haml-rails'                                        # html templates
 gem 'heroku', group: :development, require: nil
 gem 'interactive_editor', group: %w[console]            # irb interactive editing
-gem 'jazz_hands', groups: %w[development test]          # break on 'binding.pry' in code
+gem 'pry-rails', groups: %w[development test]           # nicer console
+gem 'pry-byebug', groups: %w[development test]          # break on 'binding.pry' in code
 gem 'jquery-rails'                                      # jquery
 gem 'oj'                                                # fast json parser
 gem 'pg'                                                # database driver

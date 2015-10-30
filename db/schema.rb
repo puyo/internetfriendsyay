@@ -16,22 +16,20 @@ ActiveRecord::Schema.define(version: 20110621125153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "schedules", force: true do |t|
+  create_table "schedules", force: :cascade do |t|
     t.string   "uuid",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "people", force: true do |t|
-    t.integer  "schedule_id"
+  create_table "people", force: :cascade do |t|
+    t.integer  "schedule_id", index: {name: "fk__people_schedule_id"}, foreign_key: {references: "schedules", name: "fk_people_schedule_id", on_update: :no_action, on_delete: :no_action}
     t.string   "name",        null: false
     t.string   "timezone",    null: false
     t.binary   "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["schedule_id"], :name => "fk__people_schedule_id"
-    t.index ["schedule_id"], :name => "index_people_on_schedule_id"
-    t.foreign_key ["schedule_id"], "schedules", ["id"], :on_update => :no_action, :on_delete => :no_action, :name => "fk_people_schedule_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+  add_index "people", ["schedule_id"], name: "index_people_on_schedule_id"
 
 end

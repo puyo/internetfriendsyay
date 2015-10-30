@@ -5,7 +5,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :name, :null => false
       t.string :timezone, :null => false
       t.binary :data
-      t.timestamps
+      t.timestamps null: false
     end
   end
 
