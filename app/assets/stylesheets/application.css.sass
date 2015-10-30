@@ -1,8 +1,8 @@
-//= require normalize-rails
 //= require_self
 
+@import bootstrap-sprockets
+@import bootstrap
 @import compass/css3
-@import blueprint/grid
 
 // ------------------------------------------------------------
 // layout
@@ -77,26 +77,32 @@ h1, h2, h3, h4
     +transform(rotate(-50deg))
     max-width: 10px
     position: relative
+    padding-bottom: 1em
   .check_box
     padding: 0
     margin: 0
     input
-      padding: 0
+      display: none
+    label
+      width: 40px
+      height: 20px
+      background-color: lightgrey
+      border: 1px solid white
       margin: 0
+      padding: 0
+      display: block
+    input:checked + label
+      background-color: pink !important
+  tbody th
+    padding-right: 1em
 
 // ------------------------------------------------------------
 
-.welcome
-  +container
-  p
-    +column(13)
-
-// ------------------------------------------------------------
 .schedule
-  +container
+  //+container
 
   .info
-    +column(8)
+    //+column(8)
 
     .people
       h2
@@ -110,8 +116,8 @@ h1, h2, h3, h4
           white-space: nowrap
 
   .component.timetable
-    +column(16)
-    +last
+    //+column(16)
+    //+last
     h2
       float: left
     form
@@ -122,6 +128,8 @@ h1, h2, h3, h4
         min-width: 20px
 
   .component
+    h2
+      margin-top: 0
     &.timetable, &.people
       table
         width: 100%
@@ -145,16 +153,16 @@ h1, h2, h3, h4
 // ------------------------------------------------------------
 
 header
-  +container
+  //+container
 
   .title
-    +column(12)
+    //+column(12)
     h1
       margin: 0
 
   .flash
-    +column(12)
-    +last
+    //+column(12)
+    //+last
 
     p
       margin: 0

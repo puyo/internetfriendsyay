@@ -1,9 +1,5 @@
-.field.name
-  = form.label :name
-  = form.text_field :name
-.field.timezone
-  = form.label :timezone
-  = form.time_zone_select :timezone, /Australia/
+= form.input :name, placeholder: "Name"
+= form.input :timezone, as: :time_zone, priority: /Australia/
 
 %table.field.available_at
   %thead
@@ -16,27 +12,6 @@
       %tr{:class => cycle('odd', 'even')}
         %th= time.strftime('%I:%M %p')
         - schedule.day_indexes(time_of_day_index).each do |index|
-          %td.check_box= check_box_tag format(available_at_field, index), {}, person.available_at?(index)
-
-- content_for :javascript do
-  :javascript
-    // check box drawing
-    var down = false;
-    var value = false;
-    $('input[type=checkbox]').mousedown(function(event){
-      down = true;
-      value = !$(this).attr('checked');
-      $(this).attr('checked', value);
-      return false;
-    }).mouseover(function(event){
-      if (down) { $(this).attr('checked', value); }
-      return false;
-    }).change(function(){
-      return false;
-    }).click(function(){
-      return false;
-    });
-
-    $(document).mouseup(function(){
-      down = false;
-    });
+          %td.check_box
+            = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
+            = label_tag format(available_at_field, index), ""

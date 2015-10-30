@@ -1,62 +1,65 @@
-= div_for @schedule do
+= div_for @schedule, class: 'row' do
 
-  .info
-    .component.instructions
-      %h2 Instructions
-      %ol
-        %li
-          %p Share a link to this page with people, to let them add their available times.
-        %li
-          %p Come back and see what times you are all online.
-        %li
-          %p Profit!
+  .col-sm-8
+    .component.timetable
+      %h2 Schedule
 
-    .component.people
-      %h2 People
-      .add
-        = link_to 'Add a new person', new_schedule_person_path(@schedule)
+      = form_for @user, url: user_path, method: :patch do |f|
+        = hidden_field_tag :return_to, schedule_url(@schedule)
+        = f.label :timezone, 'Time Zone:'
+        = f.time_zone_select :timezone, /Australia/
+        = f.submit 'Update', class: 'btn btn-xs btn-primary'
+
       %table
         %thead
-          %th Name
-          %th Timezone
-          %th Options
+          %tr
+            %th
+            - Schedule::DAY_NAMES.each do |name|
+              %th.heading= name[0,3]
         %tbody
-          - @schedule.people.each do |person|
+          - Schedule::TIMES_OF_DAY.each_with_index do |time, time_of_day_index|
             %tr{class: cycle('odd', 'even')}
-              %td.name= person.name
-              %td.timezone= person.timezone
-              %td.options
-                = link_to 'Edit', edit_schedule_person_path(@schedule, person)
-                = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
+              %th= time.strftime("%I:%M %p")
+              - @schedule.day_indexes(time_of_day_index).each do |index|
+                - people = @people_at_indexes[index]
+                - if people.empty? or people.size == 1
+                  - style = nil
+                - else
+                  - percent = people.size*100/@schedule.people.size
+                  - style ="background-color: hsl(0, 80%, #{100 - percent/4}%)"
+                %td.entry{:style => style}
+                  - people.each do |person|
+                    = person.name
+                    %br
 
-  .component.timetable
-    %h2 Schedule
 
-    = form_for @user, url: user_path, method: :patch do |f|
-      = hidden_field_tag :return_to, schedule_url(@schedule)
-      = f.label :timezone, 'Time Zone:'
-      = f.time_zone_select :timezone, /Australia/
-      = f.submit 'Update'
+  .col-sm-4
+    .info
+      .component.instructions
+        %h2 Instructions
+        %ol
+          %li
+            %p Share a link to this page with people, to let them add their available times.
+          %li
+            %p Come back and see what times you are all online.
+          %li
+            %p Profit!
 
-    %table
-      %thead
-        %tr
-          %th
-          - Schedule::DAY_NAMES.each do |name|
-            %th.heading= name
-      %tbody
-        - Schedule::TIMES_OF_DAY.each_with_index do |time, time_of_day_index|
-          %tr{class: cycle('odd', 'even')}
-            %th= time.strftime("%I:%M %p")
-            - @schedule.day_indexes(time_of_day_index).each do |index|
-              - people = @people_at_indexes[index]
-              - if people.empty? or people.size == 1
-                - style = nil
-              - else
-                - percent = people.size*100/@schedule.people.size
-                - style ="background-color: hsl(0, 80%, #{100 - percent/4}%)"
-              %td.entry{:style => style}
-                - people.each do |person|
-                  = person.name
-                  %br
+      .component.people
+        %h2 People
+        .add
+          = link_to 'Add a new person', new_schedule_person_path(@schedule), class: 'btn btn-sm btn-primary'
+        %table
+          %thead
+            %th Name
+            %th Timezone
+            %th Options
+          %tbody
+            - @schedule.people.each do |person|
+              %tr{class: cycle('odd', 'even')}
+                %td.name= person.name
+                %td.timezone= person.timezone
+                %td.options
+                  = link_to 'Edit', edit_schedule_person_path(@schedule, person)
+                  = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
 

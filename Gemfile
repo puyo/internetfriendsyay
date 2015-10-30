@@ -34,3 +34,6 @@ gem 'unicorn', group: %w[cli]                           # web server
 gem 'uglifier'                                          # js compressor
 gem 'normalize-rails'
 gem 'rails_12factor'
+gem 'bootstrap-sass'
+gem 'simple_form'
+gem 'jquery-ui-rails'

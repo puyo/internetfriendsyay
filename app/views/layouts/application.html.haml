@@ -1,32 +1,34 @@
 !!!
-%html
+%html(lang="en")
   %head
     %title Internet Friends Yay
     = stylesheet_link_tag 'application', media: 'all'
     = csrf_meta_tag
   %body
-    %header
-      .title
-        %h1= link_to 'Internet Friends Yay', root_url
-        .byline
-          An application for herding virtual cats.
+    .container
+      %header
+        .row
+          .title.col-sm-8
+            %h1= link_to 'Internet Friends Yay', root_url
+            .byline
+              An application for herding virtual cats.
 
-      .flash
-        - if flash.notice
-          .notice
-            %p= notice
-        - if flash.alert
-          .alert
-            %p= alert
+          .flash.col-sm-4
+            - if flash.notice
+              .notice
+                %p= notice
+            - if flash.alert
+              .alert
+                %p= alert
 
-    %article
-      = yield
+      %article
+        = yield
 
-    %footer
-      %p
-        a web app by #{link_to 'gregory mcintyre', 'http://gregorymcintyre.com'} with <tt>&lt;3</tt>
-      %p
-        please #{link_to 'report', 'https://github.com/puyo/internetfriendsyay/issues/new'} any problems
+      %footer
+        %p
+          a web app by #{link_to 'gregory mcintyre', 'http://gregorymcintyre.com'} with <tt>&lt;3</tt>
+        %p
+          please #{link_to 'report', 'https://github.com/puyo/internetfriendsyay/issues/new'} any problems
 
     = javascript_include_tag 'application'
     = yield :javascript

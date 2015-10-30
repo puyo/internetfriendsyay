@@ -1,6 +1,6 @@
 %h2 Edit Person
 
-= form_for [@schedule, @person] do |person_form|
+= simple_form_for [@schedule, @person] do |person_form|
   = render 'people/form', schedule: @schedule, person: @person, form: person_form, available_at_field: 'person[available_at[%d]]'
   .buttons
-    = person_form.submit
+    = person_form.submit class: 'btn btn-primary'
