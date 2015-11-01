@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe SchedulesController do
   let(:schedule) { mock_model(Schedule, to_param: '1', people: people) }

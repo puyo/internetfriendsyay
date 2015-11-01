@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Person do
   let(:person) { Person.new(available_at: available_at_input) }
