@@ -8,7 +8,6 @@ gem 'capistrano', group: %w[cli]                        # deploy scripts
 gem 'capistrano_colors', group: %w[cli]                 # coloured output for capistrano
 gem 'coffee-rails'                                      # coffeescript
 gem 'compass-rails', github: 'Compass/compass-rails', branch: 'master'
-gem 'compass-blueprint'
 gem 'simplecov', group: %w[test], require: nil
 gem 'database_cleaner', group: %w[test]                 # manage database truncation/transactions
 gem 'guard', group: %w[cli]                             # run commands when files change
