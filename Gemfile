@@ -24,6 +24,7 @@ gem 'pg'                                                # database driver
 gem 'quiet_assets', group: %w[development test]         # don't log asset pipeline requests
 gem 'rack-livereload', group: %w[development]           # transparent livereload client
 gem 'rspec-rails', group: %w[test], require: false      # test framework
+gem 'rspec-activemodel-mocks', group: %w[test], require: false
 gem 'sass-rails'                                        # css preprocessor
 gem 'schema_plus'                                       # foreign key constraints and other goodies
 gem 'sdoc', require: false, group: %w[doc]              # static documentation generator

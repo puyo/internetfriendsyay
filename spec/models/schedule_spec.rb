@@ -3,17 +3,17 @@ require 'spec_helper'
 describe Schedule do
   describe '#to_param' do
     it 'should return the uuid' do
-      Schedule.new(uuid: '123').to_param.should == '123'
+      expect(Schedule.new(uuid: '123').to_param).to eq('123')
     end
   end
 
   describe '#uuid' do
     it 'should be blank by default' do
-      Schedule.new.uuid.should be_blank
+      expect(Schedule.new.uuid).to be_blank
     end
 
     it 'should be set on creation' do
-      Schedule.create!.uuid.should be_present
+      expect(Schedule.create!.uuid).to be_present
     end
   end
 
@@ -22,7 +22,7 @@ describe Schedule do
     subject { schedule.day_indexes(time_of_day_index) }
     context 'with time_of_day_index 20' do
       let(:time_of_day_index) { 47 }
-      it { should == [47, 95, 143, 191, 239, 287, 335] }
+      it { is_expected.to eq([47, 95, 143, 191, 239, 287, 335]) }
     end
   end
 
@@ -30,7 +30,7 @@ describe Schedule do
     let(:schedule) { Schedule.new }
     let(:people) { [] }
     subject { schedule.people_at_indexes(timezone) }
-    before { schedule.stub(people: people) }
+    before { allow(schedule).to receive_messages(people: people) }
 
     context 'with a person at time index 0 Sydney time, and a person at time indexes 0 and 1 Sydney time' do
       before do
@@ -41,14 +41,14 @@ describe Schedule do
       context 'in Sydney time' do
         let(:timezone) { 'Sydney' }
         it 'should be the same as the inputs' do
-          subject.should == { 0 => people, 1 => [people.last] }
+          expect(subject).to eq({ 0 => people, 1 => [people.last] })
         end
       end
 
       context 'in Adelaide time' do
         let(:timezone) { 'Adelaide' }
         it 'should be offset by -1 index and wrap around' do
-          subject.should == { 335 => people, 0 => [people.last] }
+          expect(subject).to eq({ 335 => people, 0 => [people.last] })
         end
       end
     end

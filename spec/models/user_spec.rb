@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe User do
-  it { should_not be_persisted }
+  it { is_expected.not_to be_persisted }
 
   describe '#timezone' do
     it 'should default to "Sydney"' do
-      User.new.timezone.should == 'Sydney'
+      expect(User.new.timezone).to eq('Sydney')
     end
     it 'should return timezone passed to constructor' do
-      User.new(timezone: 'foo').timezone.should == 'foo'
+      expect(User.new(timezone: 'foo').timezone).to eq('foo')
     end
   end
 end

@@ -8,10 +8,10 @@ describe SchedulesController do
   let(:people_at_indexes) { double('people at indexes') }
 
   before do
-    controller.stub(user: user)
-    Schedule.stub(:find_by_uuid).with('1').and_return(schedule)
-    Schedule.stub(new: schedule)
-    schedule.stub(:people_at_indexes).with(user.timezone).and_return(people_at_indexes)
+    allow(controller).to receive_messages(user: user)
+    allow(Schedule).to receive(:find_by_uuid).with('1').and_return(schedule)
+    allow(Schedule).to receive_messages(new: schedule)
+    allow(schedule).to receive(:people_at_indexes).with(user.timezone).and_return(people_at_indexes)
   end
 
   describe '#show' do
@@ -19,7 +19,7 @@ describe SchedulesController do
       get :show, id: '1'
     end
     describe '@schedule, @people_at_indexes' do
-      specify { assigns.values_at(:schedule, :people_at_indexes).should == [schedule, people_at_indexes] }
+      specify { expect(assigns.values_at(:schedule, :people_at_indexes)).to eq([schedule, people_at_indexes]) }
     end
   end
 
@@ -28,38 +28,38 @@ describe SchedulesController do
       get :new
     end
     describe '@schedule, @person' do
-      specify { assigns.values_at(:schedule, :person).should == [schedule, person] }
+      specify { expect(assigns.values_at(:schedule, :person)).to eq([schedule, person]) }
     end
   end
 
   describe '#create' do
     context 'with valid params' do
       before do
-        schedule.stub(save: true)
+        allow(schedule).to receive_messages(save: true)
         post :create, id: '1', schedule: {people_at_indexes: []}
       end
       describe 'flash.notice' do
-        specify { flash.notice.should be_present }
+        specify { expect(flash.notice).to be_present }
       end
       describe 'response' do
-        specify { response.should be_redirect }
+        specify { expect(response).to be_redirect }
       end
     end
 
     context 'with invalid params' do
       before do
-        schedule.stub(save: false)
+        allow(schedule).to receive_messages(save: false)
         schedule.errors.add(:name, 'cannot be blank')
         post :create, id: '1', schedule: {people_at_indexes: []}
       end
       describe 'flash.alert' do
-        specify { flash.alert.should be_present }
+        specify { expect(flash.alert).to be_present }
       end
       describe '@schedule, @person' do
-        specify { assigns.values_at(:schedule, :person).should == [schedule, person] }
+        specify { expect(assigns.values_at(:schedule, :person)).to eq([schedule, person]) }
       end
       describe 'response' do
-        specify { response.should render_template('new') }
+        specify { expect(response).to render_template('new') }
       end
     end
   end

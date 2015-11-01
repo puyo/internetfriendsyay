@@ -7,50 +7,50 @@ describe PeopleController do
   let(:user) { double('user', timezone: 'Fishbuckland') }
 
   before do
-    Schedule.stub(:find_by_uuid).with('1').and_return(schedule)
-    controller.stub(user: user)
-    people.stub(:find).with('1').and_return(person)
-    people.stub(new: person)
+    allow(Schedule).to receive(:find_by_uuid).with('1').and_return(schedule)
+    allow(controller).to receive_messages(user: user)
+    allow(people).to receive(:find).with('1').and_return(person)
+    allow(people).to receive_messages(new: person)
   end
 
   describe '#new' do
     before do
-      people.stub(:build).with(timezone: user.timezone).and_return(person)
+      allow(people).to receive(:build).with(timezone: user.timezone).and_return(person)
       get :new, schedule_id: '1'
     end
     describe '@person' do
-      specify { assigns[:person].should be_present }
+      specify { expect(assigns[:person]).to be_present }
     end
   end
 
   describe '#create' do
     context 'with valid params' do
       before do
-        person.stub(save: true)
+        allow(person).to receive_messages(save: true)
         post :create, schedule_id: '1', person: {timezone: 'hithere'}
       end
       describe 'flash.notice' do
-        specify { flash.notice.should be_present }
+        specify { expect(flash.notice).to be_present }
       end
       describe 'response' do
-        specify { response.should be_redirect }
+        specify { expect(response).to be_redirect }
       end
     end
 
     context 'with invalid params' do
       before do
-        person.stub(save: false)
+        allow(person).to receive_messages(save: false)
         person.errors.add(:name, 'cannot be blank')
         post :create, schedule_id: '1', person: {timezone: 'hithere'}
       end
       describe 'flash.alert' do
-        specify { flash.alert.should be_present }
+        specify { expect(flash.alert).to be_present }
       end
       describe 'response' do
-        specify { response.should render_template('new') }
+        specify { expect(response).to render_template('new') }
       end
       describe '@person' do
-        specify { assigns[:person].should be_present }
+        specify { expect(assigns[:person]).to be_present }
       end
     end
   end
@@ -58,45 +58,45 @@ describe PeopleController do
   describe '#update' do
     context 'with valid params' do
       before do
-        person.stub(update_attributes: true)
+        allow(person).to receive_messages(update_attributes: true)
         put :update, schedule_id: '1', id: '1', person: {timezone: 'hithere'}
       end
       describe 'flash.notice' do
-        specify { flash.notice.should be_present }
+        specify { expect(flash.notice).to be_present }
       end
       describe 'response' do
-        specify { response.should be_redirect }
+        specify { expect(response).to be_redirect }
       end
     end
 
     context 'with invalid params' do
       before do
-        person.stub(update_attributes: false)
+        allow(person).to receive_messages(update_attributes: false)
         person.errors.add(:name, 'cannot be blank')
         put :update, schedule_id: '1', id: '1', person: {timezone: 'hithere'}
       end
       describe 'flash.alert' do
-        specify { flash.alert.should be_present }
+        specify { expect(flash.alert).to be_present }
       end
       describe 'response' do
-        specify { response.should render_template('edit') }
+        specify { expect(response).to render_template('edit') }
       end
       describe '@person' do
-        specify { assigns[:person].should be_present }
+        specify { expect(assigns[:person]).to be_present }
       end
     end
   end
 
   describe '#destroy' do
     before do
-      person.should_receive(:destroy)
+      expect(person).to receive(:destroy)
       delete :destroy, schedule_id: '1', id: '1'
     end
     describe 'flash.notice' do
-      specify{ flash.notice.should be_present }
+      specify{ expect(flash.notice).to be_present }
     end
     describe 'response' do
-      specify{ response.should be_redirect }
+      specify{ expect(response).to be_redirect }
     end
   end
 end
