@@ -14,7 +14,6 @@ gem 'guard', group: %w[cli]                             # run commands when file
 gem 'guard-livereload', group: %w[cli]                  # reload the web browser when source files change
 gem 'guard-rspec', group: %w[cli]                       # rerun tests when files change
 gem 'haml-rails'                                        # html templates
-gem 'heroku', group: :development, require: nil
 gem 'interactive_editor', group: %w[console]            # irb interactive editing
 gem 'pry-rails', groups: %w[development test]           # nicer console
 gem 'pry-byebug', groups: %w[development test]          # break on 'binding.pry' in code
