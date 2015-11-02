@@ -27,7 +27,7 @@ gem 'rspec-activemodel-mocks', group: %w[test], require: false
 gem 'sass-rails'                                        # css preprocessor
 gem 'schema_plus'                                       # foreign key constraints and other goodies
 gem 'sdoc', require: false, group: %w[doc]              # static documentation generator
-gem 'thin', group: %w[cli]                              # load balancer and faye friendly web server
+gem 'puma', group: %w[cli]                              # load balancer and faye friendly web server
 gem 'foreman', group: %w[cli]                           # handle procfile
 gem 'unicorn', group: %w[cli]                           # web server
 gem 'uglifier'                                          # js compressor
