@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id         :integer          not null, primary key
+#  uuid       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # A group schedule, representing the combined schedule of multiple people.
 class Schedule < ActiveRecord::Base
   has_many :people, dependent: :destroy

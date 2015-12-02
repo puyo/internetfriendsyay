@@ -1,6 +1,7 @@
 # Manage schedule resources.
 class SchedulesController < ApplicationController
   before_action :load_schedule, only: [:show]
+  before_action :massage_available_at_params, only: [:create]
 
   def show
   end
@@ -29,7 +30,20 @@ class SchedulesController < ApplicationController
     @people_at_indexes = @schedule.people_at_indexes(user.timezone)
   end
 
+  def massage_available_at_params
+    params[:schedule][:people_attributes].each do |k, v|
+      available_at = v[:available_at]
+      result = []
+      available_at.each do |index, hash|
+        result << index
+      end
+      v[:available_at] = result
+    end
+  rescue
+    # OK
+  end
+
   def schedule_params
-    params.require(:schedule).permit!
+    params.require(:schedule).permit(people_attributes: [:name, :timezone, available_at: []])
   end
 end

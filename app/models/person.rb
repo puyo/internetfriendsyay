@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id          :integer          not null, primary key
+#  schedule_id :integer
+#  name        :string           not null
+#  timezone    :string           not null
+#  data        :binary
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 # An individual person's information within a group's schedule.
 class Person < ActiveRecord::Base
   belongs_to :schedule
@@ -10,7 +23,7 @@ class Person < ActiveRecord::Base
 
   def available_at=(value)
     result = [0] * Schedule::INDEXES_PER_WEEK
-    value.keys.each do |index|
+    value.each do |index|
       byte, shift = byte_shift(index)
       result[byte] |= (1 << shift)
     end

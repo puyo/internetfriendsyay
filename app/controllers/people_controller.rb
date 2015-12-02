@@ -48,6 +48,6 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit!
+    params.require(:person).permit(:name, :timezone, :data)
   end
 end

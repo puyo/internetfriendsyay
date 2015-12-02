@@ -42,7 +42,9 @@ describe SchedulesController do
     context 'with valid params' do
       before do
         allow(schedule).to receive_messages(save: true)
-        post :create, id: '1', schedule: { people_at_indexes: [] }
+        post :create, schedule: {
+          people_attributes: {"0"=>{"name"=>"Fuuu", "timezone"=>"Perth", "available_at"=>{"144"=>{}}}}
+        }
       end
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }

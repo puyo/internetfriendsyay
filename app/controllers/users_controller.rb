@@ -3,7 +3,10 @@ class UsersController < ApplicationController
   def update
     session[:user] = user = User.new(params[:user])
     flash.notice = "Timezone changed to #{user.timezone.inspect}"
-    return redirect_to params[:return_to] if params.key?(:return_to)
+    if params.key?(:schedule_uuid)
+      redirect_to schedule_path(params[:schedule_uuid])
+      return
+    end
     redirect_to root_url
   end
 end
