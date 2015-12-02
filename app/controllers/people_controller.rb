@@ -2,6 +2,7 @@
 class PeopleController < ApplicationController
   before_action :load_schedule
   before_action :load_person, only: [:edit, :update, :destroy]
+  before_action :massage_available_at_params, only: [:create, :update]
 
   def new
     @person = @schedule.people.build(timezone: user.timezone)
@@ -47,7 +48,13 @@ class PeopleController < ApplicationController
     @schedule = Schedule.find_by_uuid(params[:schedule_id])
   end
 
+  def massage_available_at_params
+    params[:person][:available_at] = params[:person][:available_at].keys
+  rescue
+    # OK
+  end
+
   def person_params
-    params.require(:person).permit(:name, :timezone, :data)
+    params.require(:person).permit(:name, :timezone, available_at: [])
   end
 end

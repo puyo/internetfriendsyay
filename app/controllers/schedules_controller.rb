@@ -32,12 +32,7 @@ class SchedulesController < ApplicationController
 
   def massage_available_at_params
     params[:schedule][:people_attributes].each do |k, v|
-      available_at = v[:available_at]
-      result = []
-      available_at.each do |index, hash|
-        result << index
-      end
-      v[:available_at] = result
+      v[:available_at] = v[:available_at].keys
     end
   rescue
     # OK
