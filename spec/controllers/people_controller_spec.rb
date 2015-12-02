@@ -27,7 +27,7 @@ describe PeopleController do
     context 'with valid params' do
       before do
         allow(person).to receive_messages(save: true)
-        post :create, schedule_id: '1', person: {timezone: 'hithere'}
+        post :create, schedule_id: '1', person: { timezone: 'hithere' }
       end
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
@@ -41,7 +41,7 @@ describe PeopleController do
       before do
         allow(person).to receive_messages(save: false)
         person.errors.add(:name, 'cannot be blank')
-        post :create, schedule_id: '1', person: {timezone: 'hithere'}
+        post :create, schedule_id: '1', person: { timezone: 'hithere' }
       end
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
@@ -59,7 +59,7 @@ describe PeopleController do
     context 'with valid params' do
       before do
         allow(person).to receive_messages(update_attributes: true)
-        put :update, schedule_id: '1', id: '1', person: {timezone: 'hithere'}
+        put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
       end
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
@@ -73,7 +73,7 @@ describe PeopleController do
       before do
         allow(person).to receive_messages(update_attributes: false)
         person.errors.add(:name, 'cannot be blank')
-        put :update, schedule_id: '1', id: '1', person: {timezone: 'hithere'}
+        put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
       end
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
@@ -93,10 +93,10 @@ describe PeopleController do
       delete :destroy, schedule_id: '1', id: '1'
     end
     describe 'flash.notice' do
-      specify{ expect(flash.notice).to be_present }
+      specify { expect(flash.notice).to be_present }
     end
     describe 'response' do
-      specify{ expect(response).to be_redirect }
+      specify { expect(response).to be_redirect }
     end
   end
 end

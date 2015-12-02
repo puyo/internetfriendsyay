@@ -29,4 +29,3 @@ InternetFriendsYay::Application.configure do
 
   config.middleware.use Rack::LiveReload
 end
-

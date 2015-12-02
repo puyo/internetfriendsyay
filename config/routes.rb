@@ -5,4 +5,3 @@ InternetFriendsYay::Application.routes.draw do
   resource :user, only: [:update]
   root to: 'welcome#show'
 end
-

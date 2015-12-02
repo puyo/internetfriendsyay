@@ -1,6 +1,7 @@
+# Manage people resources.
 class PeopleController < ApplicationController
-  before_filter :load_schedule
-  before_filter :load_person, only: [:edit, :update, :destroy]
+  before_action :load_schedule
+  before_action :load_person, only: [:edit, :update, :destroy]
 
   def new
     @person = @schedule.people.build(timezone: user.timezone)

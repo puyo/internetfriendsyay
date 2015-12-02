@@ -1,6 +1,7 @@
+# Functionality inherited by all controllers in this project.
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  before_filter :load_user
+  protect_from_forgery with: :exception
+  before_action :load_user
 
   protected
 

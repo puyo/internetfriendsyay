@@ -3,7 +3,7 @@ require 'rails_helper'
 describe UsersController do
   let(:user) { double('user', timezone: 'Fishbuckland') }
   describe '#update' do
-    let(:request_params) { { user: {timezone: 'foobar'} } }
+    let(:request_params) { { user: { timezone: 'foobar' } } }
     before do
       allow(User).to receive(:new).and_return(user)
     end

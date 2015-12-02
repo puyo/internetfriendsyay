@@ -19,7 +19,10 @@ describe SchedulesController do
       get :show, id: '1'
     end
     describe '@schedule, @people_at_indexes' do
-      specify { expect(assigns.values_at(:schedule, :people_at_indexes)).to eq([schedule, people_at_indexes]) }
+      specify do
+        result = assigns.values_at(:schedule, :people_at_indexes)
+        expect(result).to eq([schedule, people_at_indexes])
+      end
     end
   end
 
@@ -28,7 +31,10 @@ describe SchedulesController do
       get :new
     end
     describe '@schedule, @person' do
-      specify { expect(assigns.values_at(:schedule, :person)).to eq([schedule, person]) }
+      specify do
+        result = assigns.values_at(:schedule, :person)
+        expect(result).to eq([schedule, person])
+      end
     end
   end
 
@@ -36,7 +42,7 @@ describe SchedulesController do
     context 'with valid params' do
       before do
         allow(schedule).to receive_messages(save: true)
-        post :create, id: '1', schedule: {people_at_indexes: []}
+        post :create, id: '1', schedule: { people_at_indexes: [] }
       end
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
@@ -50,13 +56,16 @@ describe SchedulesController do
       before do
         allow(schedule).to receive_messages(save: false)
         schedule.errors.add(:name, 'cannot be blank')
-        post :create, id: '1', schedule: {people_at_indexes: []}
+        post :create, id: '1', schedule: { people_at_indexes: [] }
       end
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
       end
       describe '@schedule, @person' do
-        specify { expect(assigns.values_at(:schedule, :person)).to eq([schedule, person]) }
+        specify do
+          result = assigns.values_at(:schedule, :person)
+          expect(result).to eq([schedule, person])
+        end
       end
       describe 'response' do
         specify { expect(response).to render_template('new') }

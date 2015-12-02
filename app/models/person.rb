@@ -1,11 +1,15 @@
+# An individual person's information within a group's schedule.
 class Person < ActiveRecord::Base
   belongs_to :schedule
-  validates_length_of :name, :minimum => 1, :maximum => 20
-  validates_uniqueness_of :name, :scope => :schedule_id
-  validates_inclusion_of :timezone, :in => ActiveSupport::TimeZone.zones_map.keys
+
+  validates :name,
+            length: { minimum: 1, maximum: 20 },
+            uniqueness: { scope: :schedule_id }
+  validates :timezone,
+            inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
 
   def available_at=(value)
-    result = [0]*Schedule::INDEXES_PER_WEEK
+    result = [0] * Schedule::INDEXES_PER_WEEK
     value.keys.each do |index|
       byte, shift = byte_shift(index)
       result[byte] |= (1 << shift)

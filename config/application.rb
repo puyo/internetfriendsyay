@@ -1,17 +1,17 @@
 require File.expand_path('../boot', __FILE__)
 
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "sprockets/railtie"
+require 'active_record/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'sprockets/railtie'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
 module InternetFriendsYay
+  # Rails application configuration.
   class Application < Rails::Application
-
     # config.action_view.javascript_expansions[:defaults] = %w(jquery.min rails)
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -44,11 +44,8 @@ module InternetFriendsYay
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :pixels]
 
-    if defined? config.sass
-      config.sass.preferred_syntax = :sass
-    end
+    config.sass.preferred_syntax = :sass if defined? config.sass
 
     config.i18n.enforce_available_locales = true
   end
 end
-

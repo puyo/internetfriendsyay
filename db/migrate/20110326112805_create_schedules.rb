@@ -1,7 +1,7 @@
 class CreateSchedules < ActiveRecord::Migration
   def self.up
     create_table :schedules do |t|
-      t.string :uuid, :null => false
+      t.string :uuid, null: false
       t.timestamps null: false
     end
   end

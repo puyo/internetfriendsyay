@@ -1,5 +1,6 @@
+# Manage schedule resources.
 class SchedulesController < ApplicationController
-  before_filter :load_schedule, :only => [:show]
+  before_action :load_schedule, only: [:show]
 
   def show
   end
