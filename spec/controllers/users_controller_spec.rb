@@ -18,9 +18,9 @@ describe UsersController do
     end
     describe 'response' do
       subject { response }
-      context 'with return_to == "/return_to"' do
-        let(:request_params) { { return_to: '/return_to' } }
-        it { is_expected.to redirect_to '/return_to' }
+      context 'with schedule_uuid == "23"' do
+        let(:request_params) { { schedule_uuid: 'abc23' } }
+        it { is_expected.to redirect_to '/schedules/abc23' }
       end
       context 'without return_to param' do
         it { is_expected.to redirect_to '/' }
