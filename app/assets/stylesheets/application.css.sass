@@ -2,7 +2,6 @@
 
 @import bootstrap-sprockets
 @import bootstrap
-@import compass/css3
 
 // ------------------------------------------------------------
 // layout
@@ -67,14 +66,14 @@ h1, h2, h3, h4
 .field_with_errors
   display: inline
   padding: 5px 0.5em
+  border-radius: 5px
   +alert-color
-  +border-radius(5px)
 
 .field.available_at
   font-size: 12px
   margin-top: 20px
   .heading
-    +transform(rotate(-50deg))
+    transform: rotate(-50deg)
     max-width: 10px
     position: relative
     padding-bottom: 1em
@@ -99,11 +98,7 @@ h1, h2, h3, h4
 // ------------------------------------------------------------
 
 .schedule
-  //+container
-
   .info
-    //+column(8)
-
     .people
       h2
         float: left
@@ -116,8 +111,6 @@ h1, h2, h3, h4
           white-space: nowrap
 
   .component.timetable
-    //+column(16)
-    //+last
     h2
       float: left
     form
@@ -153,17 +146,11 @@ h1, h2, h3, h4
 // ------------------------------------------------------------
 
 header
-  //+container
-
   .title
-    //+column(12)
     h1
       margin: 0
 
   .flash
-    //+column(12)
-    //+last
-
     p
       margin: 0
       padding: 5px 1em
@@ -172,7 +159,7 @@ header
       text-align: center
       font-size: 11px
       font-weight: bold
-      +border-radius(5px)
+      border-radius: 5px
       line-height: 54px
 
     .notice
