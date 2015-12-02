@@ -38,13 +38,6 @@ class Schedule < ActiveRecord::Base
     result
   end
 
-  def add_person_to_schedule(person, index_offset, schedule_hash)
-    person.available_indexes.each do |person_index|
-      index = (person_index + index_offset) % INDEXES_PER_WEEK
-      schedule_hash[index].push(person)
-    end
-  end
-
   def day_indexes(time_of_day_index)
     (time_of_day_index...(time_of_day_index + INDEXES_PER_WEEK)).step(INDEXES_PER_DAY).to_a
   end
@@ -54,6 +47,13 @@ class Schedule < ActiveRecord::Base
   end
 
   private
+
+  def add_person_to_schedule(person, index_offset, schedule_hash)
+    person.available_indexes.each do |person_index|
+      index = (person_index + index_offset) % INDEXES_PER_WEEK
+      schedule_hash[index].push(person)
+    end
+  end
 
   def set_uuid
     require 'digest/md5'
