@@ -19,7 +19,7 @@ gem 'jquery-rails'                                      # jquery
 gem 'jquery-ui-rails'
 gem 'normalize-rails'
 gem 'oj'                                                # fast json parser
-gem 'pg'                                                # database driver
+gem 'pg', '~> 0.21'                                                # database driver
 gem 'pry-byebug', groups: %w(development test)          # break on 'binding.pry' in code
 gem 'pry-rails', groups: %w(development test)           # nicer console
 gem 'puma', group: %w(cli)                              # load balancer and faye friendly web server
