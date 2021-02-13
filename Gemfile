@@ -53,4 +53,3 @@ group :cli do
   gem 'puma'                 # load balancer and faye friendly web server
   gem 'sdoc', require: false # static documentation generator
 end
-
