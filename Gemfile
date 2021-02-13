@@ -6,7 +6,6 @@ gem 'rails', '~> 4.2.4'
 
 gem 'bigdecimal', '~> 1.4.0' # upgrade requires Rails 5+
 gem 'bootstrap-sass'         #
-gem 'coffee-rails'           # coffeescript
 gem 'haml-rails'             # html templates
 gem 'jquery-rails'           # jquery
 gem 'jquery-ui-rails'        #
