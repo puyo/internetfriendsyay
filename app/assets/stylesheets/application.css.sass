@@ -11,7 +11,7 @@ $blueprint_grid_width: 20px
 $blueprint-grid-margin: 20px
 
 $default-fg: #444
-$heading-fg: blue
+$heading-fg: #286090
 $link-fg: $default-fg
 $link-hover-fg: $heading-fg
 $table-heading-fg: $default-fg
@@ -22,7 +22,8 @@ $highlight-fg: black
 $highlight-bg: #f28c8c
 
 =notice-color
-  background-color: $table-heading-bg
+  background-color: white
+  border-color: #286090
 
 =alert-color
   color: $highlight-fg
@@ -42,8 +43,6 @@ $highlight-bg: #f28c8c
 // baseline
 
 body
-  margin: 20px auto
-  width: 940px
   color: $default-fg
   font-family: Verdana, Arial, Helvetica, sans-serif
   font-size: 16px
@@ -73,10 +72,10 @@ h1, h2, h3, h4
   font-size: 12px
   margin-top: 20px
   .heading
-    transform: rotate(-50deg)
     max-width: 10px
     position: relative
     padding-bottom: 1em
+    padding: 0
   .check_box
     padding: 0
     margin: 0
@@ -90,8 +89,8 @@ h1, h2, h3, h4
       margin: 0
       padding: 0
       display: block
-    input:checked + label
-      background-color: pink !important
+    input[checked=checked] + label
+      background-color: #286090 !important
   tbody th
     padding-right: 1em
 
@@ -139,6 +138,9 @@ h1, h2, h3, h4
         background-color: $table-light-bg
       .even
         background-color: $table-dark-bg
+      tbody
+        th
+          width: 1%
 
   .component
     margin-bottom: 20px
@@ -156,11 +158,12 @@ header
       padding: 5px 1em
 
     .notice, .alert
+      border: 1px solid transparent
       text-align: center
       font-size: 11px
-      font-weight: bold
       border-radius: 5px
       line-height: 54px
+      font-size: 16px
 
     .notice
       +notice-color
