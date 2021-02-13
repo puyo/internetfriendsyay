@@ -18,6 +18,7 @@ describe PeopleController do
       allow(people).to receive(:build).with(timezone: user.timezone).and_return(person)
       get :new, schedule_id: '1'
     end
+
     describe '@person' do
       specify { expect(assigns[:person]).to be_present }
     end
@@ -29,9 +30,11 @@ describe PeopleController do
         allow(person).to receive_messages(save: true)
         post :create, schedule_id: '1', person: { timezone: 'hithere' }
       end
+
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
       end
+
       describe 'response' do
         specify { expect(response).to be_redirect }
       end
@@ -43,12 +46,15 @@ describe PeopleController do
         person.errors.add(:name, 'cannot be blank')
         post :create, schedule_id: '1', person: { timezone: 'hithere' }
       end
+
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
       end
+
       describe 'response' do
         specify { expect(response).to render_template('new') }
       end
+
       describe '@person' do
         specify { expect(assigns[:person]).to be_present }
       end
@@ -61,9 +67,11 @@ describe PeopleController do
         allow(person).to receive_messages(update_attributes: true)
         put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
       end
+
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
       end
+
       describe 'response' do
         specify { expect(response).to be_redirect }
       end
@@ -75,12 +83,15 @@ describe PeopleController do
         person.errors.add(:name, 'cannot be blank')
         put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
       end
+
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
       end
+
       describe 'response' do
         specify { expect(response).to render_template('edit') }
       end
+
       describe '@person' do
         specify { expect(assigns[:person]).to be_present }
       end
@@ -92,9 +103,11 @@ describe PeopleController do
       expect(person).to receive(:destroy)
       delete :destroy, schedule_id: '1', id: '1'
     end
+
     describe 'flash.notice' do
       specify { expect(flash.notice).to be_present }
     end
+
     describe 'response' do
       specify { expect(response).to be_redirect }
     end

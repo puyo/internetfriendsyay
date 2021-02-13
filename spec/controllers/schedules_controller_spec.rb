@@ -18,6 +18,7 @@ describe SchedulesController do
     before do
       get :show, id: '1'
     end
+
     describe '@schedule, @people_at_indexes' do
       specify do
         result = assigns.values_at(:schedule, :people_at_indexes)
@@ -30,6 +31,7 @@ describe SchedulesController do
     before do
       get :new
     end
+
     describe '@schedule, @person' do
       specify do
         result = assigns.values_at(:schedule, :person)
@@ -46,9 +48,11 @@ describe SchedulesController do
           people_attributes: {"0"=>{"name"=>"Fuuu", "timezone"=>"Perth", "available_at"=>{"144"=>{}}}}
         }
       end
+
       describe 'flash.notice' do
         specify { expect(flash.notice).to be_present }
       end
+
       describe 'response' do
         specify { expect(response).to be_redirect }
       end
@@ -60,15 +64,18 @@ describe SchedulesController do
         schedule.errors.add(:name, 'cannot be blank')
         post :create, id: '1', schedule: { people_at_indexes: [] }
       end
+
       describe 'flash.alert' do
         specify { expect(flash.alert).to be_present }
       end
+
       describe '@schedule, @person' do
         specify do
           result = assigns.values_at(:schedule, :person)
           expect(result).to eq([schedule, person])
         end
       end
+
       describe 'response' do
         specify { expect(response).to render_template('new') }
       end
