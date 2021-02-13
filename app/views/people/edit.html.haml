@@ -1,15 +1,7 @@
 %h2 Edit Person
 
-.row
-  .col-md-3.col-md-push-9
-    %h4 Instructions
-    %ol
-      %li Enter your name
-      %li Select your timezone
-      %li Click and drag to colour in your availability
-  .col-md-9.col-md-pull-3
-    = simple_form_for [@schedule, @person] do |person_form|
-      = render 'people/form', schedule: @schedule, person: @person, form: person_form, available_at_field: 'person[available_at[%d]]'
-      .buttons
-        = person_form.submit class: 'btn btn-primary'
+= simple_form_for [@schedule, @person] do |person_form|
+  = render 'people/form', schedule: @schedule, person: @person, form: person_form, available_at_field: 'person[available_at[%d]]'
+  .buttons
+    = person_form.submit class: 'btn btn-primary'
 
