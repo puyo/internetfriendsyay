@@ -26,7 +26,7 @@ describe UsersController do
       subject { response }
 
       context 'with schedule_uuid == "23"' do
-        let(:request_params) { { schedule_uuid: 'abc23' } }
+        let(:request_params) { { user: {timezone:  'Australia/Sydney'}, schedule_uuid: 'abc23' } }
         it { is_expected.to redirect_to '/schedules/abc23' }
       end
 
