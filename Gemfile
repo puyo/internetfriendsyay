@@ -45,7 +45,6 @@ group :development do
   gem 'spring', require: nil                # cache Rails env for faster cli
   gem 'spring-commands-rspec', require: nil # cached Rails for faster rspec runs
   gem 'spring-watcher-listen', require: nil
-  gem 'unicorn', require: nil               # web server
   gem 'web-console'             # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
 
