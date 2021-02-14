@@ -4,15 +4,16 @@ ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
 
 gem 'rails', '~> 5.0.0'
 
-gem 'bootstrap-sass'         #
-gem 'haml-rails'             # html templates
-gem 'normalize-rails'        #
-gem 'oj'                     # fast json parser
-gem 'pg'                     # database driver, upgrade requires Rails 5.1+
-gem 'sass-rails'             # css preprocessor
-gem 'simple_form'            #
-gem 'uglifier'               # js compressor
-gem 'jquery-rails'
+gem 'bootstrap-sass'     #
+gem 'haml-rails'         # html templates
+gem 'jquery-rails'       # jquery asset
+gem 'normalize-rails'    #
+gem 'oj'                 # fast json parser
+gem 'pg'                 # database driver, upgrade requires Rails 5.1+
+gem 'puma', require: nil # load balancer and faye friendly web server
+gem 'sass-rails'         # css preprocessor
+gem 'simple_form'        #
+gem 'uglifier'           # js compressor
 
 group :production do
   gem 'rails_12factor' # heroku
@@ -39,7 +40,6 @@ group :development do
   gem 'guard-livereload', require: nil      # reload the web browser when source files change
   gem 'guard-rspec', require: nil           # rerun tests when files change
   gem 'interactive_editor', require: nil    # irb interactive editing
-  gem 'puma', require: nil                  # load balancer and faye friendly web server
   gem 'rack-livereload'                     # transparent livereload client
   gem 'sdoc', require: nil                  # static documentation generator
   gem 'spring', require: nil                # cache Rails env for faster cli
