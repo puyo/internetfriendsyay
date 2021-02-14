@@ -23,7 +23,7 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update_attributes(person_params)
+    if @person.update(person_params)
       flash.notice = "Person #{@person.name.inspect} updated"
       redirect_to @schedule
     else

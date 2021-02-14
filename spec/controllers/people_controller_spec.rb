@@ -64,7 +64,7 @@ describe PeopleController do
   describe '#update' do
     context 'with valid params' do
       before do
-        allow(person).to receive_messages(update_attributes: true)
+        allow(person).to receive_messages(update: true)
         put :update, params: { schedule_id: '1', id: '1', person: { timezone: 'hithere' } }
       end
 
@@ -79,7 +79,7 @@ describe PeopleController do
 
     context 'with invalid params' do
       before do
-        allow(person).to receive_messages(update_attributes: false)
+        allow(person).to receive_messages(update: false)
         person.errors.add(:name, 'cannot be blank')
         put :update, params: { schedule_id: '1', id: '1', person: { timezone: 'hithere' } }
       end

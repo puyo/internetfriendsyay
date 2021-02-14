@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
 
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.1.0'
 
 gem 'bootstrap-sass'     #
 gem 'haml-rails'         # html templates
