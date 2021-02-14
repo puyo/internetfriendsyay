@@ -21,6 +21,12 @@ group :production do
   gem 'rails_12factor' # heroku
 end
 
+group :development, :test do
+  gem 'pry-byebug'   # break on 'binding.pry' in code
+  gem 'pry-rails'    # nicer console
+  gem 'quiet_assets' # don't log asset pipeline requests
+end
+
 group :test do
   gem 'database_cleaner'                      # manage database truncation/transactions
   gem 'rspec-activemodel-mocks', require: nil #
@@ -28,27 +34,18 @@ group :test do
   gem 'simplecov', require: nil               #
 end
 
-group :development, :test do
-  gem 'pry-byebug'   # break on 'binding.pry' in code
-  gem 'pry-rails'    # nicer console
-  gem 'quiet_assets' # don't log asset pipeline requests
-end
-
 group :development do
-  gem 'rack-livereload' # transparent livereload client
-  gem 'spring'
-  gem 'spring-commands-rspec'
-end
-
-group :cli do
-  gem 'capistrano'           # deploy scripts
-  gem 'capistrano_colors'    # coloured output for capistrano
-  gem 'foreman'              # handle procfile
-  gem 'guard'                # run commands when files change
-  gem 'guard-livereload'     # reload the web browser when source files change
-  gem 'guard-rspec'          # rerun tests when files change
-  gem 'unicorn'              # web server
-  gem 'interactive_editor'   # irb interactive editing
-  gem 'puma'                 # load balancer and faye friendly web server
-  gem 'sdoc', require: false # static documentation generator
+  gem 'rack-livereload'                     # transparent livereload client
+  gem 'spring', require: nil                # cache Rails env for faster cli
+  gem 'spring-commands-rspec', require: nil # cached Rails for faster rspec runs
+  gem 'capistrano', require: nil            # deploy scripts
+  gem 'capistrano_colors', require: nil     # coloured output for capistrano
+  gem 'foreman', require: nil               # handle procfile
+  gem 'guard', require: nil                 # run commands when files change
+  gem 'guard-livereload', require: nil      # reload the web browser when source files change
+  gem 'guard-rspec', require: nil           # rerun tests when files change
+  gem 'unicorn', require: nil               # web server
+  gem 'interactive_editor', require: nil    # irb interactive editing
+  gem 'puma', require: nil                  # load balancer and faye friendly web server
+  gem 'sdoc', require: nil                  # static documentation generator
 end
