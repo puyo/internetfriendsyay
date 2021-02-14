@@ -15,6 +15,6 @@ class UsersController < ApplicationController
   end
 
   def schedule_uuid
-    params.permit(:schedule_uuid)[:schedule_uuid]
+    params.require(:schedule_uuid)
   end
 end
