@@ -9,7 +9,7 @@
 #
 
 # A group schedule, representing the combined schedule of multiple people.
-class Schedule < ActiveRecord::Base
+class Schedule < ApplicationRecord
   has_many :people, dependent: :destroy
   before_create :set_uuid
   accepts_nested_attributes_for :people

@@ -11,6 +11,7 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
+require 'rails-controller-testing'
 require 'rspec/active_model/mocks'
 
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -42,25 +43,4 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-end
-
-# a workaround to avoid MonitorMixin double-initialize error
-# https://github.com/rails/rails/issues/34790#issuecomment-681034561
-if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.6.0')
-  if Gem::Version.new(Rails.version) < Gem::Version.new('5.0.0')
-    class ActionController::TestResponse < ActionDispatch::TestResponse
-      def recycle!
-        if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.7.0')
-          @mon_data = nil
-          @mon_data_owner_object_id = nil
-        else
-          @mon_mutex = nil
-          @mon_mutex_owner_object_id = nil
-        end
-        initialize
-      end
-    end
-  else
-    warn "Monkeypatch for ActionController::TestResponse is no longer needed"
-  end
 end

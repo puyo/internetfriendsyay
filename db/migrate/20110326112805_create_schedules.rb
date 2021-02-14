@@ -1,12 +1,12 @@
 class CreateSchedules < ActiveRecord::Migration
-  def self.up
+  def up
     create_table :schedules do |t|
       t.string :uuid, null: false
       t.timestamps null: false
     end
   end
 
-  def self.down
+  def down
     drop_table :schedules
   end
 end

@@ -16,7 +16,7 @@ describe SchedulesController do
 
   describe '#show' do
     before do
-      get :show, id: '1'
+      get :show, params: { id: '1' }
     end
 
     describe '@schedule, @people_at_indexes' do
@@ -44,8 +44,10 @@ describe SchedulesController do
     context 'with valid params' do
       before do
         allow(schedule).to receive_messages(save: true)
-        post :create, schedule: {
-          people_attributes: {"0"=>{"name"=>"Fuuu", "timezone"=>"Perth", "available_at"=>{"144"=>{}}}}
+        post :create, params: {
+          schedule: {
+            people_attributes: {"0"=>{"name"=>"Fuuu", "timezone"=>"Perth", "available_at"=>{"144"=>{}}}}
+          }
         }
       end
 
@@ -62,7 +64,7 @@ describe SchedulesController do
       before do
         allow(schedule).to receive_messages(save: false)
         schedule.errors.add(:name, 'cannot be blank')
-        post :create, id: '1', schedule: { people_at_indexes: [] }
+        post :create, params: { id: '1', schedule: { people_attributes: {'0' => {'name' => ''}} } }
       end
 
       describe 'flash.alert' do

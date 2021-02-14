@@ -10,3 +10,4 @@ tags
 public/assets
 coverage
 coverage.data
+/node_modules

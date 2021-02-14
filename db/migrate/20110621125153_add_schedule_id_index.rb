@@ -1,9 +1,9 @@
 class AddScheduleIdIndex < ActiveRecord::Migration
-  def self.up
+  def up
     add_index :people, :schedule_id
   end
 
-  def self.down
+  def down
     remove_index :people, :schedule_id
   end
 end

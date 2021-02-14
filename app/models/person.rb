@@ -12,14 +12,14 @@
 #
 
 # An individual person's information within a group's schedule.
-class Person < ActiveRecord::Base
+class Person < ApplicationRecord
   belongs_to :schedule
 
   validates :name,
             length: { minimum: 1, maximum: 20 },
             uniqueness: { scope: :schedule_id }
-  validates :timezone,
-            inclusion: { in: ActiveSupport::TimeZone.zones_map.keys }
+
+  validate :timezone_check
 
   def available_at=(value)
     result = [0] * Schedule::INDEXES_PER_WEEK
@@ -51,5 +51,9 @@ class Person < ActiveRecord::Base
 
   def byte_shift(index)
     index.to_i.divmod(8)
+  end
+
+  def timezone_check
+    errors.add(:timezone) if ActiveSupport::TimeZone.new(timezone).nil?
   end
 end

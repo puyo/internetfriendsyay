@@ -1,5 +1,5 @@
 class CreatePeople < ActiveRecord::Migration
-  def self.up
+  def up
     create_table :people do |t|
       t.references :schedule
       t.string :name, null: false
@@ -9,7 +9,7 @@ class CreatePeople < ActiveRecord::Migration
     end
   end
 
-  def self.down
+  def down
     drop_table :people
   end
 end

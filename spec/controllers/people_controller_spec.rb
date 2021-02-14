@@ -16,7 +16,7 @@ describe PeopleController do
   describe '#new' do
     before do
       allow(people).to receive(:build).with(timezone: user.timezone).and_return(person)
-      get :new, schedule_id: '1'
+      get :new, params: { schedule_id: '1' }
     end
 
     describe '@person' do
@@ -28,7 +28,7 @@ describe PeopleController do
     context 'with valid params' do
       before do
         allow(person).to receive_messages(save: true)
-        post :create, schedule_id: '1', person: { timezone: 'hithere' }
+        post :create, params: { schedule_id: '1', person: { timezone: 'hithere' } }
       end
 
       describe 'flash.notice' do
@@ -44,7 +44,7 @@ describe PeopleController do
       before do
         allow(person).to receive_messages(save: false)
         person.errors.add(:name, 'cannot be blank')
-        post :create, schedule_id: '1', person: { timezone: 'hithere' }
+        post :create, params: { schedule_id: '1', person: { timezone: 'hithere' } }
       end
 
       describe 'flash.alert' do
@@ -65,7 +65,7 @@ describe PeopleController do
     context 'with valid params' do
       before do
         allow(person).to receive_messages(update_attributes: true)
-        put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
+        put :update, params: { schedule_id: '1', id: '1', person: { timezone: 'hithere' } }
       end
 
       describe 'flash.notice' do
@@ -81,7 +81,7 @@ describe PeopleController do
       before do
         allow(person).to receive_messages(update_attributes: false)
         person.errors.add(:name, 'cannot be blank')
-        put :update, schedule_id: '1', id: '1', person: { timezone: 'hithere' }
+        put :update, params: { schedule_id: '1', id: '1', person: { timezone: 'hithere' } }
       end
 
       describe 'flash.alert' do
@@ -101,7 +101,7 @@ describe PeopleController do
   describe '#destroy' do
     before do
       expect(person).to receive(:destroy)
-      delete :destroy, schedule_id: '1', id: '1'
+      delete :destroy, params: { schedule_id: '1', id: '1' }
     end
 
     describe 'flash.notice' do

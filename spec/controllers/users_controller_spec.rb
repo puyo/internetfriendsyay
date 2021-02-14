@@ -11,7 +11,7 @@ describe UsersController do
     end
 
     before do
-      put :update, request_params
+      put :update, params: request_params
     end
 
     describe 'flash.notice' do
