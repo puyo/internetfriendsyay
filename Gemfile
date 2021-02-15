@@ -15,10 +15,6 @@ gem 'simple_form'                                                  # more conven
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'webpacker'                                                    # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 
-group :production do
-  gem 'rails_12factor' # heroku
-end
-
 group :development, :test do
   gem 'pry-byebug' # break on 'binding.pry' in code
   gem 'pry-rails'  # nicer console
