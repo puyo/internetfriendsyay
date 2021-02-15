@@ -6,6 +6,8 @@
       %li Select your timezone
       %li Click and drag to fill in your availability
   .col-md-8
+    = render '/flash_alerts'
+
     = form.input :name, placeholder: "Name"
     = form.input :timezone, as: :time_zone, priority: /Australia/, input_html: { class: 'custom-select' }
     .row

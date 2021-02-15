@@ -1,3 +1,5 @@
+= render '/flash_alerts'
+
 .schedule
   .row
     .col-md-4
@@ -26,8 +28,8 @@
                 %td.options
                   = link_to 'Edit', edit_schedule_person_path(@schedule, person)
                   = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
-        %p.text-right
-          = link_to 'Add a new person', new_schedule_person_path(@schedule)
+        %p
+          = link_to 'Add a person', new_schedule_person_path(@schedule)
 
     .col-md-8
       %h4 Schedule
