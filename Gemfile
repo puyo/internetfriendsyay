@@ -5,9 +5,7 @@ ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
 gem 'rails', '~> 6.1.0'
 
 gem 'bootsnap', require: false                                     # Reduces boot times through caching; required in config/boot.rb
-#gem 'bootstrap'                                                    # css framework
 gem 'haml-rails'                                                   # html templates
-#gem 'jquery-rails'                                                 # jquery asset
 gem 'pg'                                                           # database driver, upgrade requires Rails 5.1+
 gem 'puma', require: nil                                           # load balancer and faye friendly web server
 gem 'sass-rails'                                                   # css preprocessor
