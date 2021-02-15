@@ -5,14 +5,16 @@ ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
 gem 'rails', '~> 6.1.0'
 
 gem 'bootsnap', require: false                                     # Reduces boot times through caching; required in config/boot.rb
-gem 'haml-rails'                                                   # html templates
-gem 'pg'                                                           # database driver, upgrade requires Rails 5.1+
-gem 'puma', require: nil                                           # load balancer and faye friendly web server
-gem 'simple_form'                                                  # more convenient form methods
+gem 'geocoder'                                                     # Guess users' timezone
+gem 'haml-rails'                                                   # HTML templates
+gem 'pg'                                                           # Database driver, upgrade requires Rails 5.1+
+gem 'puma', require: nil                                           # Load balancer and faye friendly web server
+gem 'simple_form'                                                  # More convenient form methods
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'webpacker'                                                    # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 
-gem 'spring'                              # cache Rails env for faster cli
+# TODO: move this back into development group and fix binstubs
+gem 'spring'                              # Cache Rails env for faster cli
 
 group :development, :test do
   gem 'pry-byebug' # break on 'binding.pry' in code
@@ -40,4 +42,3 @@ group :development do
   gem 'spring-watcher-listen', require: nil
   gem 'web-console'                         # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 end
-

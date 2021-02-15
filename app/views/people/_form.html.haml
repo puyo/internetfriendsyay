@@ -8,8 +8,9 @@
   .col-md-8
     = render '/flash_alerts'
 
-    = form.input :name, placeholder: "Name"
-    = form.input :timezone, as: :time_zone, priority: /Australia/, input_html: { class: 'custom-select' }
+    = form.input :name, placeholder: 'Name'
+    = form.input :timezone, as: :time_zone, input_html: { class: 'custom-select' }, **time_zone_options(form.object.timezone, request.remote_ip)
+
     .row
       .col-lg-auto
         .form-group
@@ -46,4 +47,5 @@
                     %td.check_box
                       = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
                       = label_tag format(available_at_field, index), ""
+
     = form.submit 'Save', class: 'btn btn-primary'

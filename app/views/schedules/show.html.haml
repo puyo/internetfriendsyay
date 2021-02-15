@@ -38,8 +38,8 @@
         = form_for @user, url: user_path, method: :patch do |f|
           = hidden_field_tag :schedule_uuid, @schedule.uuid
           .input-group
-            =# f.label :timezone, 'Time Zone:', class: 'hidden-xs'
-            = f.time_zone_select :timezone, /Australia/, {}, class: 'custom-select'
+            - opts = time_zone_options(f.object.timezone, request.remote_ip)
+            = f.time_zone_select :timezone, opts[:priority], opts, class: 'custom-select'
             .input-group-append
               = f.submit 'Update', class: 'btn btn-xs btn-secondary'
 
