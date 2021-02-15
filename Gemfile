@@ -13,9 +13,6 @@ gem 'simple_form'                                                  # More conven
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'webpacker'                                                    # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 
-# TODO: move this back into development group and fix binstubs
-gem 'spring'                              # Cache Rails env for faster cli
-
 group :development, :test do
   gem 'pry-byebug' # break on 'binding.pry' in code
   gem 'pry-rails'  # nicer console
@@ -38,6 +35,7 @@ group :development do
   gem 'rack-livereload'                     # transparent livereload client
   gem 'rack-mini-profiler'                  # Display performance information such as SQL time and flame graphs for each request in your browser.
   gem 'sdoc', require: nil                  # static documentation generator
+  gem 'spring'                              # Cache Rails env for faster cli
   gem 'spring-commands-rspec', require: nil # cached Rails for faster rspec runs
   gem 'spring-watcher-listen', require: nil
   gem 'web-console'                         # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
