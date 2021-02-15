@@ -27,5 +27,5 @@ InternetFriendsYay::Application.configure do
   # number of complex assets.
   # config.assets.debug = true
 
-  config.middleware.use Rack::LiveReload
+  config.middleware.use Rack::LiveReload, source: :vendored, no_swf: true
 end
