@@ -20,10 +20,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'                      # manage database truncation/transactions
-  gem 'rspec-activemodel-mocks', require: nil #
-  gem 'rspec-rails', require: nil             # test framework
-  gem 'rails-controller-testing'              # `assigns' in tests
+  gem 'database_cleaner'                      # Manage database truncation/transactions
+  gem 'rspec-rails', require: nil             # Test framework
   gem 'simplecov', require: nil               #
 end
 

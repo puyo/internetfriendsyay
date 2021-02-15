@@ -198,10 +198,6 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.2.1)
       sprockets-rails (>= 2.0.0)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -222,10 +218,6 @@ GEM
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
       rspec-mocks (~> 3.10.0)
-    rspec-activemodel-mocks (1.1.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -318,8 +310,6 @@ DEPENDENCIES
   rack-livereload
   rack-mini-profiler
   rails (~> 6.1.0)
-  rails-controller-testing
-  rspec-activemodel-mocks
   rspec-rails
   sdoc
   simple_form

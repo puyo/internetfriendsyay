@@ -12,8 +12,6 @@ if Rails.env.production?
 end
 require 'spec_helper'
 require 'rspec/rails'
-require 'rails-controller-testing'
-require 'rspec/active_model/mocks'
 
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
