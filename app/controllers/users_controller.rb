@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
+  private
+
   def user_params
     params.require(:user).permit(:timezone)
   end

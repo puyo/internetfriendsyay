@@ -12,5 +12,4 @@ class ApplicationController < ActionController::Base
   def load_user
     @user = session[:user] || User.new
   end
-
 end

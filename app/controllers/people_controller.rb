@@ -35,6 +35,12 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     flash.notice = "Person #{@person.name.inspect} removed"
+    if @schedule.people.empty?
+      @schedule.destroy
+      flash.notice << ", empty schedule removed"
+      redirect_to root_url
+      return
+    end
     redirect_to @schedule
   end
 
