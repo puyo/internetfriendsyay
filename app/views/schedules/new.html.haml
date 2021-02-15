@@ -2,4 +2,4 @@
   = schedule_form.fields_for :people do |people_form|
     = render 'people/form', schedule: @schedule, person: @person, form: people_form, available_at_field: 'schedule[people_attributes[0][available_at[%d]]]'
   .buttons
-    = schedule_form.button :submit, class: 'btn btn-primary'
+    = schedule_form.submit 'Save', class: 'btn btn-primary'

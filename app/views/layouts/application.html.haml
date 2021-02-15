@@ -1,11 +1,15 @@
 !!!
-%html(lang="en")
+%html
   %head
     %title Internet Friends Yay
-    = stylesheet_link_tag 'application', media: 'all'
+    %meta(name="viewport" content="width=device-width,initial-scale=1")
     = csrf_meta_tag
+    = csp_meta_tag
+
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
   %body
-    .container
+    .container-md
       %header
         .row
           .title.col-sm-8
@@ -29,6 +33,3 @@
           a web app by #{link_to 'gregory mcintyre', 'http://gregorymcintyre.com'} with <tt>&lt;3</tt>
         %p
           please #{link_to 'report', 'https://github.com/puyo/internetfriendsyay/issues/new'} any problems
-
-    = javascript_include_tag 'application'
-    = yield :javascript
