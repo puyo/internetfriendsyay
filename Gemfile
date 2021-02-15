@@ -8,7 +8,7 @@ gem 'bootsnap', require: false                                     # Reduces boo
 gem 'haml-rails'                                                   # html templates
 gem 'pg'                                                           # database driver, upgrade requires Rails 5.1+
 gem 'puma', require: nil                                           # load balancer and faye friendly web server
-gem 'sass-rails'                                                   # css preprocessor
+#gem 'sass-rails'                                                   # css preprocessor
 gem 'simple_form'                                                  # more convenient form methods
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'webpacker'                                                    # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

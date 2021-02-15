@@ -19,3 +19,5 @@ require("bootstrap/dist/js/bootstrap")
 
 import './checkbox'
 import './time-zone-select'
+
+require("./application.css")
