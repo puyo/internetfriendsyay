@@ -11,30 +11,8 @@ $table-heading-fg: $default-fg
 $table-heading-bg: #c4bcbc
 $table-light-bg: #f4eeee
 $table-dark-bg: #e4dddd
-$highlight-fg: black
-$highlight-bg: #f28c8c
 
 @import bootstrap/scss/bootstrap
-
-// ------------------------------------------------------------
-
-=notice-color
-  background-color: white
-  border-color: #286090
-
-=alert-color
-  color: $highlight-fg
-  background-color: $highlight-bg
-
-=table-heading-color
-  color: $table-heading-fg
-  background-color: $table-heading-bg
-
-=heading
-  color: $heading-fg
-  a
-    text-decoration: none
-    color: $heading-fg
 
 // ------------------------------------------------------------
 // baseline
@@ -44,30 +22,63 @@ body
   font-family: Verdana, Arial, Helvetica, sans-serif
   font-size: 16px
 
-header, article, footer
-  margin: 20px 0
+header, footer
+  margin: 1rem 0
+
+header
+  .title
+    h1
+      margin: 0
+  .byline
+    margin-bottom: 1rem
+    color: $secondary
+
+footer
+  font-size: 13px
+  text-align: right
+  color: $secondary
+  border-top: 1px dashed #888
 
 h1, h2, h3, h4
-  +heading
+  color: $heading-fg
+  a
+    text-decoration: none
+    color: $heading-fg
+
+.help-block
+  color: $warning
 
 // ------------------------------------------------------------
-// forms
+// custom stuff
 
-.buttons
-  margin: 10px 0
+.new_user
+  margin-bottom: 1rem
 
-.field
-  margin: 10px 0
+.schedule
+  .timetable, .people
+    font-size: 10px
+    @include media-breakpoint-up(sm)
+      font-size: 12px
+    @include media-breakpoint-up(md)
+      font-size: 14px
+    th, td
+      padding: 2px 0.5em
+      border: 1px solid white
+      vertical-align: top
+    th
+      color: $table-heading-fg
+      background-color: $table-heading-bg
+      white-space: nowrap
+    .odd
+      background-color: $table-light-bg
+    .even
+      background-color: $table-dark-bg
+    tbody
+      th
+        width: 1%
 
-.field_with_errors
-  display: inline
-  padding: 5px 0.5em
-  border-radius: 5px
-  +alert-color
-
-.field.available_at
+.available_at
   font-size: 12px
-  margin-top: 20px
   .heading
     max-width: 10px
     position: relative
@@ -90,89 +101,4 @@ h1, h2, h3, h4
       background-color: #286090 !important
   tbody th
     padding-right: 1em
-
-// ------------------------------------------------------------
-
-.schedule
-  .info
-    .people
-      h2
-        float: left
-      .add
-        float: right
-        line-height: 28px
-      table
-        clear: both
-        .options
-          white-space: nowrap
-
-  .component.timetable
-    h2
-      float: left
-    form
-      float: right
-    table
-      clear: both
-      .entry
-        min-width: 20px
-
-  .component
-    h2
-      margin-top: 0
-    &.timetable, &.people
-      table
-        width: 100%
-        font-size: 12px
-        font-family: sans-serif
-      th, td
-        padding: 2px 0.5em
-        border: 1px solid white
-        vertical-align: top
-      th
-        +table-heading-color
-        white-space: nowrap
-      .odd
-        background-color: $table-light-bg
-      .even
-        background-color: $table-dark-bg
-      tbody
-        th
-          width: 1%
-
-  .component
-    margin-bottom: 20px
-
-// ------------------------------------------------------------
-
-header
-  .title
-    h1
-      margin: 0
-
-  .flash
-    p
-      margin: 0
-      padding: 5px 1em
-
-    .notice, .alert
-      border: 1px solid transparent
-      text-align: center
-      font-size: 11px
-      border-radius: 5px
-      line-height: 54px
-      font-size: 16px
-
-    .notice
-      +notice-color
-
-    .alert
-      +alert-color
-
-// ------------------------------------------------------------
-
-footer
-  font-size: 13px
-  text-align: right
-  color: #888
-  border-top: 1px dashed #888
 

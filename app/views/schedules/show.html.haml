@@ -1,47 +1,48 @@
 .schedule
   .row
     .col-md-4
-      .info
-        .component.instructions
-          %h4 Instructions
-          %ol
-            %li
-              %p Share a link to this page with people, to let them add their available times.
-            %li
-              %p Come back and see what times you are all online.
-            %li
-              %p Profit!
+      .instructions
+        %h4 Instructions
+        %ol
+          %li
+            %p Share a link to this page with people, to let them add their available times.
+          %li
+            %p Come back and see what times you are all online.
+          %li
+            %p Profit!
 
-        .component.people
-          %h4 People
-          %table
-            %thead
-              %th Name
-              %th Timezone
-              %th Options
-            %tbody
-              - @schedule.people.each do |person|
-                %tr{class: cycle('odd', 'even')}
-                  %td.name= person.name
-                  %td.timezone= person.timezone
-                  %td.options
-                    = link_to 'Edit', edit_schedule_person_path(@schedule, person)
-                    = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
-          .add
-            = link_to 'Add a new person', new_schedule_person_path(@schedule), class: 'btn btn-sm btn-primary'
+      .people
+        %h4 People
+        %table.table
+          %thead
+            %th Name
+            %th Timezone
+            %th Options
+          %tbody
+            - @schedule.people.each do |person|
+              %tr{class: cycle('odd', 'even')}
+                %td.name= person.name
+                %td.timezone= person.timezone
+                %td.options
+                  = link_to 'Edit', edit_schedule_person_path(@schedule, person)
+                  = link_to 'Remove', schedule_person_path(@schedule, person), confirm: 'Are you sure?', method: 'delete'
+        %p.text-right
+          = link_to 'Add a new person', new_schedule_person_path(@schedule)
 
     .col-md-8
-      .component.timetable
-        %h4 Schedule
+      %h4 Schedule
 
+      .timezone
         = form_for @user, url: user_path, method: :patch do |f|
           = hidden_field_tag :schedule_uuid, @schedule.uuid
-          .field
-            = f.label :timezone, 'Time Zone:', class: 'hidden-xs'
-            = f.time_zone_select :timezone, /Australia/
-            = f.submit 'Update', class: 'btn btn-xs btn-primary'
+          .input-group
+            =# f.label :timezone, 'Time Zone:', class: 'hidden-xs'
+            = f.time_zone_select :timezone, /Australia/, {}, class: 'custom-select'
+            .input-group-append
+              = f.submit 'Update', class: 'btn btn-xs btn-secondary'
 
-        %table
+      .timetable
+        %table.table
           %thead
             %tr
               %th

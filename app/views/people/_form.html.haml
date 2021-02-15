@@ -7,42 +7,41 @@
       %li Click and drag to fill in your availability
   .col-md-8
     = form.input :name, placeholder: "Name"
-    = form.input :timezone, as: :time_zone, priority: /Australia/
-
+    = form.input :timezone, as: :time_zone, priority: /Australia/, input_html: { class: 'custom-select' }
     .row
       .col-lg-auto
-        %h4 Morning (AM)
-        %table.field.available_at
-          %thead
-            %tr
-              %th
-              - Schedule::DAY_NAMES.each do |name|
-                %th.heading= name[0,2]
-          %tbody
-            - Schedule::TIMES_OF_DAY[0,24].each_with_index do |time, time_of_day_index|
-              %tr{:class => cycle('odd', 'even')}
-                %th= time.strftime('%I:%M')
-                - schedule.day_indexes(time_of_day_index).each do |index|
-                  %td.check_box
-                    = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
-                    = label_tag format(available_at_field, index), ""
+        .form-group
+          %h4 Morning (AM)
+          %table.available_at
+            %thead
+              %tr
+                %th
+                - Schedule::DAY_NAMES.each do |name|
+                  %th.heading= name[0,2]
+            %tbody
+              - Schedule::TIMES_OF_DAY[0,24].each_with_index do |time, time_of_day_index|
+                %tr{:class => cycle('odd', 'even')}
+                  %th= time.strftime('%I:%M')
+                  - schedule.day_indexes(time_of_day_index).each do |index|
+                    %td.check_box
+                      = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
+                      = label_tag format(available_at_field, index), ""
 
       .col-lg-auto
-        %h4 Afternoon (PM)
-        %table.field.available_at
-          %thead
-            %tr
-              %th
-              - Schedule::DAY_NAMES.each do |name|
-                %th.heading= name[0,2]
-          %tbody
-            - Schedule::TIMES_OF_DAY[24..-1].each_with_index do |time, time_of_day_index|
-              %tr{:class => cycle('odd', 'even')}
-                %th= time.strftime('%I:%M')
-                - schedule.day_indexes(time_of_day_index + 24).each do |index|
-                  %td.check_box
-                    = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
-                    = label_tag format(available_at_field, index), ""
-
-    .buttons
-      = form.submit 'Save', class: 'btn btn-primary'
+        .form-group
+          %h4 Afternoon (PM)
+          %table.available_at
+            %thead
+              %tr
+                %th
+                - Schedule::DAY_NAMES.each do |name|
+                  %th.heading= name[0,2]
+            %tbody
+              - Schedule::TIMES_OF_DAY[24..-1].each_with_index do |time, time_of_day_index|
+                %tr{:class => cycle('odd', 'even')}
+                  %th= time.strftime('%I:%M')
+                  - schedule.day_indexes(time_of_day_index + 24).each do |index|
+                    %td.check_box
+                      = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
+                      = label_tag format(available_at_field, index), ""
+    = form.submit 'Save', class: 'btn btn-primary'
