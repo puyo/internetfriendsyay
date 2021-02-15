@@ -2,5 +2,3 @@
 
 = simple_form_for [@schedule, @person] do |f|
   = render 'people/form', schedule: @schedule, person: @person, form: f, available_at_field: 'person[available_at[%d]]'
-  .buttons
-    = f.submit 'Save', class: 'btn btn-primary'

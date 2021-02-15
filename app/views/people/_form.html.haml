@@ -10,7 +10,7 @@
     = form.input :timezone, as: :time_zone, priority: /Australia/
 
     .row
-      .col-sm-6
+      .col-lg-auto
         %h4 Morning (AM)
         %table.field.available_at
           %thead
@@ -27,7 +27,7 @@
                     = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
                     = label_tag format(available_at_field, index), ""
 
-      .col-sm-6
+      .col-lg-auto
         %h4 Afternoon (PM)
         %table.field.available_at
           %thead
@@ -43,3 +43,6 @@
                   %td.check_box
                     = check_box_tag format(available_at_field, index), {}, person.available_at?(index)
                     = label_tag format(available_at_field, index), ""
+
+    .buttons
+      = form.submit 'Save', class: 'btn btn-primary'
