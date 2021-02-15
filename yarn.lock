@@ -3973,6 +3973,11 @@ jest-worker@^26.5.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
+jquery-touch-events@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/jquery-touch-events/-/jquery-touch-events-1.0.7.tgz#4404e8dded603e762e99895ef503ecbbf402d66d"
+  integrity sha1-RATo3e1gPnYumYle9QPsu/QC1m0=
+
 jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"

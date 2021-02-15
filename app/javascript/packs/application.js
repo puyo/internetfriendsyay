@@ -15,9 +15,6 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("bootstrap/dist/js/bootstrap")
-
-import './checkbox'
-import './time-zone-select'
-
-require("./application.css")
+import '../checkbox'
+import '../time-zone-select'
+import '../../stylesheets/application.css'
