@@ -38,6 +38,13 @@ class Schedule < ApplicationRecord
     result
   end
 
+  def utc_index(index, timezone)
+    user_monday = next_monday(timezone) + (index * (60 * MINUTES_PER_INDEX))
+    utc_monday = next_monday('UTC')
+    index_offset = (user_monday.to_i - utc_monday.to_i) / (60 * MINUTES_PER_INDEX)
+    index_offset % INDEXES_PER_WEEK
+  end
+
   def day_indexes(time_of_day_index)
     (time_of_day_index...(time_of_day_index + INDEXES_PER_WEEK)).step(INDEXES_PER_DAY).to_a
   end

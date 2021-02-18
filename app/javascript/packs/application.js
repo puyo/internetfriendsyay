@@ -22,3 +22,6 @@ Rails.start()
 import '../checkbox'
 import '../time-zone-select'
 import '../../stylesheets/application.css'
+
+// work in progress
+//import '../schedule'
