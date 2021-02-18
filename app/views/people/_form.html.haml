@@ -23,7 +23,7 @@
                   %th.heading= name[0,2]
             %tbody
               - Schedule::TIMES_OF_DAY[0,24].each_with_index do |time, time_of_day_index|
-                %tr{:class => cycle('odd', 'even')}
+                %tr{class: cycle('odd', 'even')}
                   %th= time.strftime('%I:%M')
                   - schedule.day_indexes(time_of_day_index).each do |index|
                     %td.check_box
@@ -41,7 +41,7 @@
                   %th.heading= name[0,2]
             %tbody
               - Schedule::TIMES_OF_DAY[24..-1].each_with_index do |time, time_of_day_index|
-                %tr{:class => cycle('odd', 'even')}
+                %tr{class: cycle('odd', 'even')}
                   %th= time.strftime('%I:%M')
                   - schedule.day_indexes(time_of_day_index + 24).each do |index|
                     %td.check_box

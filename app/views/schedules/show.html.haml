@@ -61,7 +61,7 @@
                   - else
                     - percent = people.size*100/@schedule.people.size
                     - style ="background-color: hsl(0, 80%, #{100 - percent/4}%)"
-                  %td.entry{:style => style}
+                  %td.entry{style: style}
                     - people.each do |person|
                       = person.name
                       %br
