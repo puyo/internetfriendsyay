@@ -17,7 +17,7 @@ RSpec.describe "/users", type: :request do
 
       it "updates the requested user session" do
         patch user_url, params: { user: new_attributes, schedule_uuid: '123' }
-        expect(session[:user].timezone).to eq('Australia/Perth')
+        expect(session[:user]).to match({'timezone' => 'Australia/Perth'})
       end
 
       it "redirects to the schedule" do

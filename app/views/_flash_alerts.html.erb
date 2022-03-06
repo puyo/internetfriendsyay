@@ -1,0 +1,12 @@
+<div class="flash">
+  <% if flash.notice %>
+    <div class="alert alert-success">
+      <%= notice %>
+    </div>
+  <% end %>
+  <% if flash.alert %>
+    <div class="alert alert-warning">
+      <%= alert %>
+    </div>
+  <% end %>
+</div>

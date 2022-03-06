@@ -1,0 +1,145 @@
+body
+  background-color: red
+
+// ------------------------------------------------------------
+// bootstrap
+
+$primary: #0056b3
+$default-fg: #444
+$heading-fg: #286090
+$link-fg: $default-fg
+$link-hover-fg: $heading-fg
+$table-heading-fg: $default-fg
+$table-heading-bg: #c4bcbc
+$table-light-bg: #f4eeee
+$table-dark-bg: #e4dddd
+
+//@import bootstrap/containers
+//@import bootstrap/functions
+//@import bootstrap/variables
+//@import bootstrap/mixins
+//@import bootstrap/root
+//@import bootstrap/reboot
+//@import bootstrap/type
+////@import bootstrap/images
+////@import bootstrap/code
+//@import bootstrap/grid
+//@import bootstrap/tables
+//@import bootstrap/forms
+//@import bootstrap/buttons
+////@import bootstrap/transitions
+////@import bootstrap/dropdown
+//@import bootstrap/button-group
+////@import bootstrap/input-group
+////@import bootstrap/custom-forms
+////@import bootstrap/nav
+////@import bootstrap/navbar
+////@import bootstrap/card
+////@import bootstrap/breadcrumb
+////@import bootstrap/pagination
+////@import bootstrap/badge
+////@import bootstrap/jumbotron
+//@import bootstrap/alert
+////@import bootstrap/progress
+////@import bootstrap/media
+////@import bootstrap/list-group
+////@import bootstrap/close
+////@import bootstrap/toasts
+////@import bootstrap/modal
+////@import bootstrap/tooltip
+////@import bootstrap/popover
+////@import bootstrap/carousel
+////@import bootstrap/spinners
+////@import bootstrap/utilities
+
+@import bootstrap
+
+// ------------------------------------------------------------
+// baseline
+
+body
+  color: $default-fg
+  font-family: Verdana, Arial, Helvetica, sans-serif
+  font-size: 16px
+  margin-top: 1rem
+  margin-bottom: 1rem
+
+header
+  .title
+    h1
+      margin: 0
+  .byline
+    margin-bottom: 1rem
+    color: $secondary
+
+footer
+  margin-top: 1rem
+  font-size: 13px
+  text-align: right
+  color: $secondary
+  border-top: 1px dashed #888
+
+h1, h2, h3, h4
+  color: $heading-fg
+  a
+    text-decoration: none
+    color: $heading-fg
+
+.help-block
+  color: $warning
+
+// ------------------------------------------------------------
+// custom stuff
+
+.new_user
+  margin-bottom: 1rem
+
+.schedule
+  .timetable, .people
+    font-size: 10px
+    @include media-breakpoint-up(sm)
+      font-size: 12px
+    @include media-breakpoint-up(md)
+      font-size: 14px
+    th, td
+      padding: 2px 0.5em
+      border: 1px solid white
+      vertical-align: top
+    th
+      color: $table-heading-fg
+      background-color: $table-heading-bg
+      white-space: nowrap
+    .odd
+      background-color: $table-light-bg
+    .even
+      background-color: $table-dark-bg
+    tbody
+      th
+        width: 1%
+
+.available_at
+  font-size: 12px
+  .heading
+    max-width: 10px
+    position: relative
+    padding-bottom: 1em
+    padding: 0
+  .check_box
+    padding: 0
+    margin: 0
+    input
+      display: none
+    label
+      width: 40px
+      height: 20px
+      background-color: lightgrey
+      border: 1px solid white
+      margin: 0
+      padding: 0
+      display: block
+    input[checked=checked] + label
+      background-color: #286090 !important
+  tbody th
+    padding-right: 1em
+
+

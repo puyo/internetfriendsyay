@@ -1,4 +1,6 @@
-require('jquery-touch-events')($)
+import $ from "jquery";
+import jte from "jquery-touch-events";
+jte($)
 
 $(function() {
   var down = false

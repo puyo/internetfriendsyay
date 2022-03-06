@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-md-4">
+    <h4>Instructions</h4>
+    <ol>
+      <li>Enter your name</li>
+      <li>Select your timezone</li>
+      <li>Click or touch and drag to fill in your availability</li>
+    </ol>
+  </div>
+  <div class="col-md-8">
+    <%= render '/flash_alerts' %>
+    <%= form.input :name, placeholder: 'Name' %>
+    <%= form.input :timezone, as: :time_zone, input_html: { class: 'custom-select' }, **time_zone_options(form.object.timezone, request.remote_ip) %>
+    <div class="row">
+      <div class="col-lg-auto">
+        <div class="form-group">
+          <h4>Morning (AM)</h4>
+          <table class="available_at">
+            <thead>
+              <tr>
+                <th></th>
+                <% Schedule::DAY_NAMES.each do |name| %>
+                  <th class="heading">
+                    <%= name[0,2] %>
+                  </th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% Schedule::TIMES_OF_DAY[0,24].each_with_index do |time, time_of_day_index| %>
+                <tr class="<%= cycle('odd', 'even') %>">
+                  <th>
+                    <%= time.strftime('%I:%M') %>
+                  </th>
+                  <% schedule.day_indexes(time_of_day_index).each do |index| %>
+                    <td class="check_box">
+                      <%= check_box_tag format(available_at_field, index), {}, person.available_at?(index) %>
+                      <%= label_tag format(available_at_field, index), "" %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-auto">
+        <div class="form-group">
+          <h4>Afternoon (PM)</h4>
+          <table class="available_at">
+            <thead>
+              <tr>
+                <th></th>
+                <% Schedule::DAY_NAMES.each do |name| %>
+                  <th class="heading">
+                    <%= name[0,2] %>
+                  </th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% Schedule::TIMES_OF_DAY[24..-1].each_with_index do |time, time_of_day_index| %>
+                <tr class="<%= cycle('odd', 'even') %>">
+                  <th>
+                    <%= time.strftime('%I:%M') %>
+                  </th>
+                  <% schedule.day_indexes(time_of_day_index + 24).each do |index| %>
+                    <td class="check_box">
+                      <%= check_box_tag format(available_at_field, index), {}, person.available_at?(index) %>
+                      <%= label_tag format(available_at_field, index), "" %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+</div>

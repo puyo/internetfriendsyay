@@ -1,42 +1,35 @@
 source 'https://rubygems.org'
 
-ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
+ruby File.read(File.dirname(__FILE__) + '/.tool-versions').match(/ruby (\S+)/).captures.first
 
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 7.0.2', '>= 7.0.2.2'
 
-gem 'bootsnap', require: false                                     # Reduces boot times through caching; required in config/boot.rb
-gem 'geocoder'                                                     # Guess users' timezone
-gem 'haml-rails'                                                   # HTML templates
-gem 'pg'                                                           # Database driver, upgrade requires Rails 5.1+
-gem 'puma', require: nil                                           # Load balancer and faye friendly web server
-gem 'simple_form'                                                  # More convenient form methods
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'webpacker'                                                    # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'bootsnap', require: false                                  # Reduces boot times through caching; required in config/boot.rb
+gem 'bootstrap'                                                 # CSS framework
+gem 'importmap-rails'                                           # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem 'pg', '~> 1.1'                                              # Use postgresql as the database for Active Record
+gem 'puma', '~> 5.0'                                            # Use the Puma web server [https://github.com/puma/puma]
+gem 'sassc-rails'                                               # Use Sass to process CSS
+gem 'simple_form'                                               # form helpers
+gem 'sprockets-rails'                                           # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'geocoder', '~> 1.7'                                        # Guess users' timezone
 
 group :development, :test do
-  gem 'pry-byebug' # break on 'binding.pry' in code
-  gem 'pry-rails'  # nicer console
-end
-
-group :test do
-  gem 'database_cleaner'                      # Manage database truncation/transactions
-  gem 'rspec-rails', require: nil             # Test framework
-  gem 'simplecov', require: nil               #
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'debug', platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  gem 'capistrano', require: nil            # deploy scripts
-  gem 'capistrano_colors', require: nil     # coloured output for capistrano
-  gem 'foreman', require: nil               # handle procfile
-  gem 'guard', require: nil                 # run commands when files change
-  gem 'guard-livereload', require: nil      # reload the web browser when source files change
-  gem 'guard-rspec', require: nil           # rerun tests when files change
-  gem 'interactive_editor', require: nil    # irb interactive editing
-  gem 'rack-livereload'                     # transparent livereload client
-  gem 'rack-mini-profiler'                  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  gem 'sdoc', require: nil                  # static documentation generator
-  gem 'spring'                              # Cache Rails env for faster cli
-  gem 'spring-commands-rspec', require: nil # cached Rails for faster rspec runs
-  gem 'spring-watcher-listen', require: nil
-  gem 'web-console'                         # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'web-console'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'simplecov', require: nil               #
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end

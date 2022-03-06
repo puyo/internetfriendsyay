@@ -4,9 +4,9 @@ class User
 
   attr_accessor :timezone
 
-  def initialize(attributes = {})
+  def initialize(timezone:)
     super
-    self.timezone ||= 'Sydney'
+    self.timezone = timezone
   end
 
   def persisted?

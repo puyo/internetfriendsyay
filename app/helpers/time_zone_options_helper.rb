@@ -2,7 +2,7 @@ module TimeZoneOptionsHelper
   def time_zone_options(current_timezone, ip)
     if current_timezone
       tz = ActiveSupport::TimeZone.new(current_timezone)
-      return {priority: priorities(tz)}
+      return { priority: priorities(tz) }
     end
     return {} if ip == '127.0.0.1' || ip.blank?
     results = Geocoder.search(ip)
