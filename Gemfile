@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby File.read(File.dirname(__FILE__) + '/.ruby-version').strip
+ruby File.read(File.dirname(__FILE__) + '/.tool-versions').match(/ruby (\S+)/).captures.first
 
 gem 'rails', '~> 6.1.0'
 
