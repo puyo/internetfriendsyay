@@ -2,8 +2,8 @@
 
 // import * as popper from 'popper'
 // import * as bootstrap from 'bootstrap'
-import './custom/checkbox'
-import './custom/time-zone-select'
+import 'custom/checkbox'
+import 'custom/time-zone-select'
 
 import Rails from '@rails/ujs'
 
