@@ -1,4 +1,10 @@
 <h2>Edit Person</h2>
-<%= simple_form_for [@schedule, @person] do |person_form| %>
-  <%= render 'people/form', schedule: @schedule, person: @person, form: person_form, available_at_field: 'person[available_at[%d]]' %>
+
+<%= simple_form_for [@schedule, @person] do |form| %>
+  <%= render 'people/form', schedule: @schedule, person: @person, form: form, available_at_field: 'person[available_at[%d]]' %>
+  <%= form.button :submit, "Update Person's Schedule", class: 'btn btn-primary' %>
 <% end %>
+
+<div class="mt-3">
+  <%= button_to 'Remove Person from the Schedule', schedule_person_path(@schedule, @person), data: { confirm: 'Are you sure?' }, method: 'delete', class: 'btn btn-outline-danger' %>
+</div>

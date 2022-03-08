@@ -1,4 +1,6 @@
 <h2>New Person</h2>
-<%= simple_form_for [@schedule, @person] do |f| %>
-  <%= render 'people/form', schedule: @schedule, person: @person, form: f, available_at_field: 'person[available_at[%d]]' %>
+
+<%= simple_form_for [@schedule, @person] do |form| %>
+  <%= render 'people/form', schedule: @schedule, person: @person, form: form, available_at_field: 'person[available_at[%d]]' %>
+  <%= form.button :submit, "Add Person's Schedule", class: 'btn btn-primary' %>
 <% end %>

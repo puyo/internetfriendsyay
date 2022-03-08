@@ -14,70 +14,97 @@ $table-heading-bg: #c4bcbc
 $table-light-bg: #f4eeee
 $table-dark-bg: #e4dddd
 
-//@import bootstrap/containers
-//@import bootstrap/functions
-//@import bootstrap/variables
-//@import bootstrap/mixins
-//@import bootstrap/root
-//@import bootstrap/reboot
-//@import bootstrap/type
-////@import bootstrap/images
-////@import bootstrap/code
-//@import bootstrap/grid
-//@import bootstrap/tables
-//@import bootstrap/forms
-//@import bootstrap/buttons
-////@import bootstrap/transitions
-////@import bootstrap/dropdown
-//@import bootstrap/button-group
-////@import bootstrap/input-group
-////@import bootstrap/custom-forms
-////@import bootstrap/nav
-////@import bootstrap/navbar
-////@import bootstrap/card
-////@import bootstrap/breadcrumb
-////@import bootstrap/pagination
-////@import bootstrap/badge
-////@import bootstrap/jumbotron
-//@import bootstrap/alert
-////@import bootstrap/progress
-////@import bootstrap/media
-////@import bootstrap/list-group
-////@import bootstrap/close
-////@import bootstrap/toasts
-////@import bootstrap/modal
-////@import bootstrap/tooltip
-////@import bootstrap/popover
-////@import bootstrap/carousel
-////@import bootstrap/spinners
-////@import bootstrap/utilities
+$badge-padding-y: 0.25em
+$badge-padding-x: 0.5em
+$badge-font-size: 0.875rem
+$badge-font-weight: 400
 
-@import bootstrap
+// scss-docs-start import-stack
+// Configuration
+@import "bootstrap/functions"
+@import "bootstrap/variables"
+@import "bootstrap/mixins"
+@import "bootstrap/utilities"
+
+// Layout & components
+@import "bootstrap/root"
+@import "bootstrap/reboot"
+@import "bootstrap/type"
+// @import "bootstrap/images"
+@import "bootstrap/containers"
+@import "bootstrap/grid"
+@import "bootstrap/tables"
+@import "bootstrap/forms"
+@import "bootstrap/buttons"
+// @import "bootstrap/transitions"
+// @import "bootstrap/dropdown"
+// @import "bootstrap/button-group"
+// @import "bootstrap/nav"
+// @import "bootstrap/navbar"
+// @import "bootstrap/card"
+// @import "bootstrap/accordion"
+// @import "bootstrap/breadcrumb"
+// @import "bootstrap/pagination"
+// @import "bootstrap/badge"
+@import "bootstrap/alert"
+// @import "bootstrap/progress"
+// @import "bootstrap/list-group"
+// @import "bootstrap/close"
+// @import "bootstrap/toasts"
+// @import "bootstrap/modal"
+// @import "bootstrap/tooltip"
+// @import "bootstrap/popover"
+// @import "bootstrap/carousel"
+// @import "bootstrap/spinners"
+// @import "bootstrap/offcanvas"
+// @import "bootstrap/placeholders"
+
+// Helpers
+@import "bootstrap/helpers";
+
+// Utilities
+@import "bootstrap/utilities/api";
+
+// scss-docs-end import-stack
 
 // ------------------------------------------------------------
 // baseline
+
 
 body
   color: $default-fg
   font-family: Verdana, Arial, Helvetica, sans-serif
   font-size: 16px
-  margin-top: 1rem
-  margin-bottom: 1rem
+  background-color: hsl(0, 0%, 93%)
 
 header
-  .title
-    h1
-      margin: 0
+  border-bottom: 1px dashed #888
+  padding: 1rem
+  background-color: transparent
+  background-color: hsl(48, 40%, 93%)
+
+  h1
+    margin: 0
+    font-weight: bold
   .byline
-    margin-bottom: 1rem
-    color: $secondary
+    color: hsla(0, 0%, 50%, 70%)
+
+.main
+  background-color: white
+  padding-top: 1rem
+  padding-bottom: 1rem
 
 footer
-  margin-top: 1rem
+  border-top: 1px dashed #888
   font-size: 13px
   text-align: right
-  color: $secondary
-  border-top: 1px dashed #888
+  color: hsla(0, 0%, 50%, 70%)
+  padding-top: 1rem
+  padding-bottom: 1rem
+
+  p
+    margin-top: 0
+    margin-bottom: 0
 
 h1, h2, h3, h4
   color: $heading-fg
@@ -88,6 +115,11 @@ h1, h2, h3, h4
 .help-block
   color: $warning
 
+.options
+  button
+    outline: none
+    border: none
+
 // ------------------------------------------------------------
 // custom stuff
 
@@ -95,7 +127,24 @@ h1, h2, h3, h4
   margin-bottom: 1rem
 
 .schedule
-  .timetable, .people
+  .people > *
+    white-space: nowrap
+    margin-top: 5px
+
+  .add-person
+    padding-left: 1em
+    padding-right: 1em
+
+  .timezone
+    display: flex
+    flex-direction: row-reverse
+    align-items: flex-end
+    height: 100%
+
+    form
+      margin: 0
+
+  .timetable
     font-size: 10px
     @include media-breakpoint-up(sm)
       font-size: 12px

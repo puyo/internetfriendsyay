@@ -3,21 +3,21 @@ import jte from "jquery-touch-events";
 jte($)
 
 $(function() {
-  var down = false
-  var value = false
-  var labels = $('.available_at .check_box label')
+  let down = false
+  let value = false
+  const labels = $('.available_at .check_box label')
 
   function handleDown(event) {
     event.preventDefault()
     down = true
-    var $input = $('#' + $(event.currentTarget).attr('for'))
+    const $input = $('#' + $(event.currentTarget).attr('for'))
     value = $input.attr('checked') === undefined
     $input.attr('checked', value).prop('checked', value)
   }
 
   function handleMoveLabel(label) {
     if (down) {
-      var $input = $('#' + $(label).attr('for'))
+      const $input = $('#' + $(label).attr('for'))
       $input.attr('checked', value).prop('checked', value)
     }
   }
@@ -32,9 +32,9 @@ $(function() {
       // Interpolate from previous (x,y) to catch everything in a line from
       // previous known touch event.
 
-      var touch = event.touches[0]
-      var x = touch.pageX
-      var y = touch.pageY
+      const touch = event.touches[0]
+      const x = touch.pageX
+      const y = touch.pageY
 
       labels.each(function(index, label) {
         var $label = $(label)

@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>InternetFriendsYay3</title>
+    <% title = (yield :title).strip %>
+    <% if title.present? %>
+      <title><%= title %> - Internet Friends Yay</title>
+    <% else %>
+      <title>Internet Friends Yay</title>
+    <% end %>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -17,8 +22,10 @@
         <div class="byline">An application for herding virtual cats</div>
       </div>
     </header>
-    <div class="container-md">
-      <%= yield %>
+    <div class="main">
+      <div class="container-md">
+        <%= yield %>
+      </div>
     </div>
     <footer>
       <div class="container-md">

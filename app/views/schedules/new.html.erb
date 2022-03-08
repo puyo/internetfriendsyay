@@ -1,5 +1,6 @@
 <%= simple_form_for @schedule do |schedule_form| %>
   <%= schedule_form.fields_for :people do |people_form| %>
     <%= render 'people/form', schedule: @schedule, person: @person, form: people_form, available_at_field: 'schedule[people_attributes[0][available_at[%d]]]' %>
+    <%= schedule_form.button :submit, class: 'btn btn-primary' %>
   <% end %>
 <% end %>
