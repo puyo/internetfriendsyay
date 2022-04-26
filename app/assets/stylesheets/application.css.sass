@@ -166,6 +166,17 @@ h1, h2, h3, h4
       th
         width: 1%
 
+  .hl
+    position: relative
+  .hl::after
+    content: ' '
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    background-color: hsla(60, 80%, 75%, 0.5)
+
 .available_at
   font-size: 12px
   .heading

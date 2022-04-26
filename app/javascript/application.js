@@ -4,6 +4,7 @@
 // import * as bootstrap from 'bootstrap'
 import 'custom/checkbox'
 import 'custom/time-zone-select'
+import 'custom/schedule'
 
 import Rails from '@rails/ujs'
 

@@ -2,7 +2,7 @@
 
 <% content_for :title, @schedule.uuid[0, 5] %>
 
-<div class="schedule">
+<div class="schedule" data-id="<%= @schedule.uuid %>">
 
   <div id="instructions" style="display:none">
     <ol>
@@ -71,7 +71,7 @@
                 <% percent = people.size*100/@schedule.people.size %>
                 <% style = "background-color: hsl(0, 80%, #{100 - percent/4}%)" %>
               <% end %>
-              <td class="entry" style="<%= style %>", data-index="<%= utc_index %>">
+              <td class="entry" <% if style %>style="<%= style %>"<% end %> data-index="<%= utc_index %>">
                 <% people.each do |person| %>
                   <div><%= person.name %></div>
                 <% end %>
